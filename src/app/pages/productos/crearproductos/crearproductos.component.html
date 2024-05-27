@@ -1,0 +1,44 @@
+<div class="form-container">
+  <h2>Crear Producto</h2>
+  <form (ngSubmit)="guardarProducto()">
+    <div class="form-group">
+      <label for="nombreProducto">Nombre Producto:</label>
+      <input type="text" id="nombreProducto" [(ngModel)]="nuevoProducto.nombreProducto" name="nombreProducto" required>
+    </div>
+    <div class="form-group">
+      <label for="catProducto">Categoría Producto:</label>
+      <input type="text" id="catProducto" [(ngModel)]="nuevoProducto.catProducto" name="catProducto" required>
+    </div>
+    <div class="form-group">
+      <label for="precioProducto">Precio Producto:</label>
+      <input type="number" id="precioProducto" [(ngModel)]="nuevoProducto.precioProducto" name="precioProducto" required>
+    </div>
+    <div class="form-group">
+      <label for="imagenProducto">Imagen Producto:</label>
+      <input type="file" id="imagenProducto" (change)="onFileSelected($event)" name="imagenProducto" required>
+    </div>
+    <div class="checkbox-group">
+      <label>Tallas:</label>
+      <div class="size-container">
+        <div class="size-item">
+          <input type="checkbox" id="tallaS" [(ngModel)]="nuevoProducto.detalleProducto.s" name="tallaS">
+          <label for="tallaS">S</label>
+          <input type="number" [(ngModel)]="nuevoProducto.detalleProducto.stock_s" name="stock_s" [disabled]="!nuevoProducto.detalleProducto.s" placeholder="Stock">
+        </div>
+        <div class="size-item">
+          <input type="checkbox" id="tallaM" [(ngModel)]="nuevoProducto.detalleProducto.m" name="tallaM">
+          <label for="tallaM">M</label>
+          <input type="number" [(ngModel)]="nuevoProducto.detalleProducto.stock_m" name="stock_m" [disabled]="!nuevoProducto.detalleProducto.m" placeholder="Stock">
+        </div>
+        <div class="size-item">
+          <input type="checkbox" id="tallaL" [(ngModel)]="nuevoProducto.detalleProducto.l" name="tallaL">
+          <label for="tallaL">L</label>
+          <input type="number" [(ngModel)]="nuevoProducto.detalleProducto.stock_l" name="stock_l" [disabled]="!nuevoProducto.detalleProducto.l" placeholder="Stock">
+        </div>
+      </div>
+    </div>
+    <div class="button-container">
+      <button type="submit">Guardar Producto</button>
+    </div>
+  </form>
+</div>

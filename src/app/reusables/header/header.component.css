@@ -1,0 +1,31 @@
+.navbar-brand {
+    font-weight: bold; /* Texto en negrita */
+}
+
+.nav-link {
+    cursor: pointer;
+    transition: text-shadow 0.3s ease, color 0.3s ease, background-color 0.3s ease, transform 0.2s ease; /* Transición suave */
+}
+
+.nav-link:hover {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Agregar sombra al texto */
+    color: #000000; /* Cambiar el color del texto al pasar el ratón */
+    background-color: #f8f9fa; /* Cambiar el fondo del enlace al pasar el ratón */
+    transform: scale(1.05); /* Escalar ligeramente el enlace */
+}
+
+
+
+.cart {
+    margin-left: 20px; /* Espacio a la izquierda del carrito */
+}
+
+.cart span {
+    font-size: 1.5em; /* Tamaño del icono del carrito */
+    cursor: pointer;
+    transition: color 0.3s ease; /* Transición suave */
+}
+
+.cart:hover span {
+    color: #007bff; /* Cambio de color del icono al pasar el ratón */
+}

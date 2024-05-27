@@ -1,0 +1,29 @@
+<div class="formulario-editar form-container">
+  <h2>Editar Producto</h2>
+  <form>
+    <div class="form-group">
+      <label for="nombre">Nombre del Producto</label>
+      <input type="text" id="nombre" [(ngModel)]="producto.nombreProducto" name="nombre" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="categoria">Categoría del Producto</label>
+      <input type="text" id="categoria" [(ngModel)]="producto.catProducto" name="categoria" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="precio">Precio del Producto</label>
+      <input type="number" id="precio" [(ngModel)]="producto.precioProducto" name="precio" class="form-control">
+    </div>
+    <div class="detalle-group">
+      <div *ngFor="let detalle of detalles" class="detalle-item">
+        <div class="talla-stock">
+          <label for="talla{{ detalle.idDetallePro }}">Talla: {{ detalle.tallas }}</label>
+          <input type="number" id="stock{{ detalle.idDetallePro }}" [(ngModel)]="detalle.stock" name="stock{{ detalle.idDetallePro }}" class="form-control" placeholder="Stock">
+        </div>
+      </div>
+    </div>
+    <div class="button-container">
+      <button type="button" class="btn btn-primary" (click)="editar()">Editar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

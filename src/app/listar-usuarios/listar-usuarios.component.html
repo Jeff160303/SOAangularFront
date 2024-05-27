@@ -1,0 +1,28 @@
+<h2>usuarios</h2>
+
+<table class="table ">
+  <thead >
+    <tr>
+      <th>DNI</th>
+      <th>NOMBRE</th>
+      <th>APELLIDO</th>
+      <th>TELEFONO</th>
+      <th>CORREO</th>
+      <th>ROL</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (usuario of usuarios; track usuario.dni) {
+      <tr>
+        <td>{{usuario.dni}}</td>
+        <td>{{usuario.nombres}}</td>
+        <td>{{usuario.apellidos}}</td>
+        <td>{{usuario.numTelefono}}</td>
+        <td>{{usuario.correo}}</td>
+        <td>{{usuario.rol}}</td>
+        <td></td>
+      </tr>
+    }
+  </tbody>
+</table>

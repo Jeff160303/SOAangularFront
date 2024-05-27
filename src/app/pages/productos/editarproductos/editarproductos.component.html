@@ -1,0 +1,33 @@
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Detalles</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>
+          <div class="product-info">
+            <h3>{{ producto.nombreProducto }}</h3>
+            <p>Categoría: {{ producto.catProducto }}</p>
+            <p>Precio: {{ producto.precioProducto }}</p>
+          </div>
+        </td>
+        <td>
+          <ul class="detail-list">
+            <li *ngFor="let detalle of producto.detalles">
+              <span>Talla: {{ detalle.tallas }}</span>
+              <span>Stock: {{ detalle.stock }}</span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <button class="action-button" [routerLink]="['/formularioeditar', producto.idproducto]">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
