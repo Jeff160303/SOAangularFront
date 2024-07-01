@@ -1,21 +1,47 @@
-import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthService, UserData } from '../../auth.service';
+import { CarritoService } from '../../carrito.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  userData: UserData | null = null;
+  cantidadProductosEnCarrito: number = 0;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService, private carritoService: CarritoService) {}
 
+  ngOnInit() {
+    this.authService.userData$.subscribe(userData => {
+      this.userData = userData;
+    });
+
+    this.carritoService.cantidadProductosEnCarrito$.subscribe(cantidad => {
+      this.cantidadProductosEnCarrito = cantidad;
+    });
   }
 
-  SingUp() {
-    this.router.navigateByUrl('/login');
+  sesion() {
+    if (this.authService.getUserRole() !== 'error') {
+      this.authService.clearUser();
+      this.router.navigateByUrl('/');
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
+
+  registro(){
+    this.router.navigateByUrl('/register');
+  }
+
+  inicio(){
+    this.router.navigateByUrl('/');
   }
 
   productos() {
@@ -25,13 +51,16 @@ export class HeaderComponent {
   crearproductos() {
     this.router.navigateByUrl('/crearproductos');
   }
-  
-  editarproductos(){
+
+  editarproductos() {
     this.router.navigateByUrl('/editarproductos');
   }
 
-  eliminarproductos(){
+  eliminarproductos() {
     this.router.navigateByUrl('/eliminarproductos');
   }
 
+  carrito(){
+    this.router.navigateByUrl('/carrito')
+  }
 }

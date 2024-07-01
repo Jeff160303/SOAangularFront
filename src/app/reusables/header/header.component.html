@@ -1,40 +1,46 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-      <a class="navbar-brand" href="#">Tienda Online</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                  <a class="nav-link" href="#home">Inicio</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" (click)="productos()">Productos</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" (click)="crearproductos()">Crear Producto</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" (click)="editarproductos()">Editar Producto</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" (click)="eliminarproductos()">Eliminar Producto</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" (click)="SingUp()">Iniciar Sesion</a>
-              </li>
-          </ul>
-          <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" />
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
+    <a class="navbar-brand" href="#">Tienda Online</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" (click)="inicio()">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="productos()">Productos</a>
+        </li>
+        <li class="nav-item" *ngIf="userData?.rol === 'administrador'">
+          <a class="nav-link" (click)="crearproductos()">Crear Producto</a>
+        </li>
+        <li class="nav-item" *ngIf="userData?.rol === 'administrador'">
+          <a class="nav-link" (click)="editarproductos()">Editar Producto</a>
+        </li>
+        <li class="nav-item" *ngIf="userData?.rol === 'administrador'">
+          <a class="nav-link" (click)="eliminarproductos()">Eliminar Producto</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <div *ngIf="!userData" class="d-flex align-items-center">
+          <a class="nav-link text-dark" (click)="sesion()" style="margin-right: 15px;">
+            <img src="https://w7.pngwing.com/pngs/654/550/png-transparent-computer-icons-login-login-button-miscellaneous-angle-text-thumbnail.png" alt="Iniciar Sesión" style="width: 20px; margin-right: 5px;">Iniciar Sesión
+          </a>
+          <a class="nav-link text-dark" (click)="registro()">
+            <img src="https://static.thenounproject.com/png/736543-200.png" alt="Registrarse" style="width: 20px; margin-right: 5px;">Registrarse
+          </a>
+        </div>
+        <div *ngIf="userData" class="user-details d-flex align-items-center">
+          <h6 class="text-dark" style="margin-right: 15px;">Welcome, <span>{{ userData.nombres }} {{ userData.apellidos }}</span></h6>
+          <a class="nav-link text-dark" (click)="sesion()">Cerrar Sesión</a>
+        </div>
+        <div *ngIf="userData" class="cart position-relative" (click)="carrito()">
+          <span class="badge badge-danger position-absolute top-0 start-100 translate-middle" style="color: red;">{{ cantidadProductosEnCarrito }}</span>
+          <span><i class="bi bi-cart4 text-dark"></i></span>
+        </div>        
       </div>
-
-      <div class="cart position-relative">
-          <span class="badge badge-danger position-absolute top-0 start-100 translate-middle" style="color: red;">0</span>
-          <span><i class="bi bi-cart4"></i></span>
-      </div>
+    </div>
   </div>
 </nav>

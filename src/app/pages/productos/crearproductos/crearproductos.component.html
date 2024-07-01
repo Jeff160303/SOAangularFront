@@ -21,19 +21,16 @@
       <label>Tallas:</label>
       <div class="size-container">
         <div class="size-item">
-          <input type="checkbox" id="tallaS" [(ngModel)]="nuevoProducto.detalleProducto.s" name="tallaS">
-          <label for="tallaS">S</label>
-          <input type="number" [(ngModel)]="nuevoProducto.detalleProducto.stock_s" name="stock_s" [disabled]="!nuevoProducto.detalleProducto.s" placeholder="Stock">
+          <label>S</label>
+          <input type="number" [(ngModel)]="nuevoProducto.tallaS" name="tallaS" placeholder="Talla S">
         </div>
         <div class="size-item">
-          <input type="checkbox" id="tallaM" [(ngModel)]="nuevoProducto.detalleProducto.m" name="tallaM">
-          <label for="tallaM">M</label>
-          <input type="number" [(ngModel)]="nuevoProducto.detalleProducto.stock_m" name="stock_m" [disabled]="!nuevoProducto.detalleProducto.m" placeholder="Stock">
+          <label>M</label>
+          <input type="number" [(ngModel)]="nuevoProducto.tallaM" name="tallaM" placeholder="Talla M">
         </div>
         <div class="size-item">
-          <input type="checkbox" id="tallaL" [(ngModel)]="nuevoProducto.detalleProducto.l" name="tallaL">
-          <label for="tallaL">L</label>
-          <input type="number" [(ngModel)]="nuevoProducto.detalleProducto.stock_l" name="stock_l" [disabled]="!nuevoProducto.detalleProducto.l" placeholder="Stock">
+          <label>L</label>
+          <input type="number" [(ngModel)]="nuevoProducto.tallaL" name="tallaL" placeholder="Talla L">
         </div>
       </div>
     </div>

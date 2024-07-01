@@ -18,14 +18,13 @@
         </td>
         <td>
           <ul class="detail-list">
-            <li *ngFor="let detalle of producto.detalles">
-              <span>Talla: {{ detalle.tallas }}</span>
-              <span>Stock: {{ detalle.stock }}</span>
-            </li>
+            <li>Talla S: {{ producto.tallaS }}</li>
+            <li>Talla M: {{ producto.tallaM }}</li>
+            <li>Talla L: {{ producto.tallaL }}</li>
           </ul>
         </td>
         <td>
-          <button class="action-button" [routerLink]="['/formularioeditar', producto.idproducto]">Editar</button>
+          <button class="action-button" (click)="editarProducto(producto.idProducto)">Editar</button>
         </td>
       </tr>
     </tbody>

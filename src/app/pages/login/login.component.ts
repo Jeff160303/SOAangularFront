@@ -4,64 +4,59 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService, UserData } from '../../auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule, HttpClientModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginObj: Login;
-  authService: any;
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.loginObj = new Login();
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
+    this.loginObj = { correo: '', contrasena: '' };
   }
 
   onLogin() {
-    debugger;
     this.http
-      .post<{
-        message: string;
-        result: boolean;
-        data: { token: string; rol: string } | null;
-      }>('http://localhost:8080/usuarios/iniciarSesion', this.loginObj)
+      .post<UserData>('http://localhost:8090/usuarios/iniciarSesion', this.loginObj)
       .subscribe(
-        (res: any) => {
-          if (res.result) {
+        (userData: UserData) => {
+          if (userData.rol !== 'error') {
+            this.authService.setUser(userData);
             Swal.fire({
-              title: "Bienvenido!",
-              text: "Acceso correcto!",
-              icon: "success"
+              title: 'Bienvenido!',
+              text: 'Acceso correcto!',
+              icon: 'success',
             });
-            localStorage.setItem('angular17token', res.data.token);
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl('/');
           } else {
-            alert(res.message);
+            Swal.fire({
+              title: 'Error!',
+              text: 'Credenciales incorrectas!',
+              icon: 'error',
+            });
           }
         },
         (error: HttpErrorResponse) => {
-          if (error.status === 401 && error.error.message) {
-            Swal.fire({
-              title: "error!",
-              text: "Credenciales incorrectas!",
-              icon: "error"
-            });
-          } else {
-            alert('Error: ' + error.message);
-          }
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error de servidor. Por favor, intenta nuevamente más tarde.',
+            icon: 'error',
+          });
         }
       );
   }
+
+  SingUp() {
+    this.router.navigateByUrl('/register');
+  }
 }
 
-export class Login {
+export interface Login {
   correo: string;
   contrasena: string;
-  constructor() {
-    this.correo = '';
-    this.contrasena = '';
-  }
 }

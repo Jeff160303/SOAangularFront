@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Producto } from '../../../models/producto.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crearproductos',
@@ -11,20 +13,16 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./crearproductos.component.css']
 })
 export class CrearproductosComponent {
-  nuevoProducto: any = {
+
+  nuevoProducto: Producto = {
+    idProducto: 0,
     nombreProducto: '',
     catProducto: '',
-    precioProducto: '',
-    detalleProducto: {
-      s: false,
-      m: false,
-      l: false,
-      stock_s: 0,
-      stock_m: 0,
-      stock_l: 0,
-      imagenProducto: ''
-    },
-    detalles: []
+    precioProducto: 0,
+    tallaS: 0,
+    tallaM: 0,
+    tallaL: 0,
+    imagenProducto: ''
   };
 
   selectedFile: File | null = null;
@@ -33,58 +31,59 @@ export class CrearproductosComponent {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    this.nuevoProducto.detalleProducto.imagenProducto = this.selectedFile ? this.selectedFile.name : '';
   }
 
   guardarProducto() {
-    const formData = new FormData();
-    if (this.selectedFile) {
-      formData.append('file', this.selectedFile);
-      this.http.post<{ imageName: string }>('http://localhost:8080/productos/upload', formData)
-        .subscribe(response => {
-          // Solo enviar el nombre del archivo sin la ruta completa
-          this.nuevoProducto.detalleProducto.imagenProducto = response.imageName.split('/').pop();
-
-          // Añadir detalles para cada talla seleccionada
-          if (this.nuevoProducto.detalleProducto.s) {
-            this.nuevoProducto.detalles.push({ tallas: 'S', stock: this.nuevoProducto.detalleProducto.stock_s, imagenProducto: response.imageName });
-          }
-          if (this.nuevoProducto.detalleProducto.m) {
-            this.nuevoProducto.detalles.push({ tallas: 'M', stock: this.nuevoProducto.detalleProducto.stock_m, imagenProducto: response.imageName });
-          }
-          if (this.nuevoProducto.detalleProducto.l) {
-            this.nuevoProducto.detalles.push({ tallas: 'L', stock: this.nuevoProducto.detalleProducto.stock_l, imagenProducto: response.imageName });
-          }
-
-          this.http.post('http://localhost:8080/productos/crear', this.nuevoProducto)
-            .subscribe(
-              response => {
-                console.log('Producto creado:', response);
-                // Reiniciar el formulario después de la creación
-                this.nuevoProducto = {
-                  nombreProducto: '',
-                  catProducto: '',
-                  precioProducto: '',
-                  detalleProducto: {
-                    s: false,
-                    m: false,
-                    l: false,
-                    stock_s: 0,
-                    stock_m: 0,
-                    stock_l: 0,
-                    imagenProducto: ''
-                  },
-                  detalles: []
-                };
-                this.selectedFile = null;
-              },
-              error => {
-                console.error('Error al crear el producto:', error);
-              }
-            );
-        });
-    } else {
+    if (!this.selectedFile) {
       console.error('Debe seleccionar un archivo de imagen.');
+      return;
     }
+
+    if (!this.nuevoProducto.tallaS) {
+      this.nuevoProducto.tallaS = 0;
+    }
+    if (!this.nuevoProducto.tallaM) {
+      this.nuevoProducto.tallaM = 0;
+    }
+    if (!this.nuevoProducto.tallaL) {
+      this.nuevoProducto.tallaL = 0;
+    }
+    if (!this.nuevoProducto.precioProducto) {
+      this.nuevoProducto.precioProducto = 0;
+    }
+
+    const formData = new FormData();
+    formData.append('producto', JSON.stringify(this.nuevoProducto));
+    formData.append('file', this.selectedFile);
+
+    this.http.post<number>('http://localhost:8080/productos/crear', formData).subscribe(
+      idProducto => {
+        console.log(`Producto creado con ID: ${idProducto}`);
+        this.nuevoProducto = {
+          idProducto: 0,
+          nombreProducto: '',
+          catProducto: '',
+          precioProducto: 0,
+          tallaS: 0,
+          tallaM: 0,
+          tallaL: 0,
+          imagenProducto: ''
+        };
+        Swal.fire({
+          title: 'Correcto',
+          text: 'Producto Creado correctamente',
+          icon: 'success',
+        });
+        this.selectedFile = null;
+      },
+      error => {
+        console.error('Error al crear el producto:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Ocurrio un problema para crear el producto',
+          icon: 'warning',
+        });
+      }
+    );
   }
 }

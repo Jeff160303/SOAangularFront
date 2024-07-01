@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  app-header {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  router-outlet {
+    flex: 1;
+    padding: 20px;
+  }

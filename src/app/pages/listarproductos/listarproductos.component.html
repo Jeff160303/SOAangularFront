@@ -1,20 +1,41 @@
 <div class="filter-bar">
-  <button class="filter-button" (click)="filtrarPorGenero('Hombre')" [class.active]="filtroActivo === 'Hombre'">Hombre</button>
-  <button class="filter-button" (click)="filtrarPorGenero('Mujer')" [class.active]="filtroActivo === 'Mujer'">Mujer</button>
-  <button class="filter-button" (click)="resetearFiltro()" [class.active]="!filtroActivo">Mostrar Todo</button>
+  <button class="filter-button" (click)="filtrarPorGenero('Hombre')" [class.active]="filtroActivo === 'Hombre'">
+    <div class="filter-content">
+      <img src="https://media.revistagq.com/photos/6093c65f235a5910299c9296/1:1/w_1200,h_1200,c_limit/massimo%20dutti%20sean_opry.jpeg" alt="Hombre">
+      <span>Hombre</span>
+    </div>
+  </button>
+  <button class="filter-button" (click)="filtrarPorGenero('Mujer')" [class.active]="filtroActivo === 'Mujer'">
+    <div class="filter-content">
+      <img src="https://www.instyle.es/medio/2022/04/10/tendencias-que-sientan-mejor-a-chicas-con-curvas_0f4c165d_1280x853.jpg" alt="Mujer">
+      <span>Mujer</span>
+    </div>
+  </button>
+  <button class="filter-button" (click)="resetearFiltro()" [class.active]="!filtroActivo">
+    <div class="filter-content">
+      <img src="https://st.depositphotos.com/2097531/2143/i/450/depositphotos_21435719-stock-photo-sexy-man-and-woman-dressed.jpg" alt="Mostrar Todo">
+      <span>Mostrar Todo</span>
+    </div>
+  </button>
 </div>
+
+<hr style="border-width: 5px; border-color:black;">
 
 <div class="product-list">
   <div *ngFor="let producto of productosFiltrados" class="product-card">
-    <div class="product-image">
-      <img [src]="producto.detalleProducto?.imagenProducto" alt="{{ producto.nombreProducto }}">
+    <div class="product-image pointer">
+      <img (click)="detalleProducto(producto.idProducto)" [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}">
     </div>
     <div class="product-details">
-      <p class="product-name">{{ producto.nombreProducto }}</p>
-      <div class="product-pricing">
+      <p class="product-name pointer" (click)="detalleProducto(producto.idProducto)">{{ producto.nombreProducto }}</p>
+      <div class="product-pricing pointer" (click)="detalleProducto(producto.idProducto)">
         <p class="product-price">S/. {{ producto.precioProducto }}</p>
         <p class="product-original-price">S/. {{ (producto.precioProducto * 1.3).toFixed(2) }}</p>
       </div>
+      <button class="btn btn-dark btn-lg" type="button" (click)="agregarPrimeraTallaDisponible(producto)">
+        Agregar al carrito
+      </button>
     </div>
   </div>
 </div>
+

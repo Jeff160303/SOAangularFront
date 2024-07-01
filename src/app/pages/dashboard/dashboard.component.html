@@ -45,23 +45,16 @@
   
   
 
-<div class="product-list">
-  <div *ngFor="let producto of productosMostrados" class="product-card">
-    <div class="product-image">
-      <img [src]="producto.detalleProducto?.imagenProducto" alt="{{ producto.nombreProducto }}">
-    </div>
-    <div class="product-details">
-      <p class="product-name">{{ producto.nombreProducto }}</p>
-      <div class="product-pricing">
-        <p class="product-price">S/. {{ producto.precioProducto }}</p>
-        <p class="product-original-price">S/. {{ (producto.precioProducto * 1.3).toFixed(2) }}</p>
+  <div class="product-list pointer">
+    <div *ngFor="let producto of productosMostrados" class="product-card">
+      <div class="product-image">
+        <img (click)="detalleProducto(producto.idProducto)" [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}">
+      </div>
+      <div class="product-details">
+        <p class="product-name">{{ producto.nombreProducto }}</p>
       </div>
     </div>
   </div>
-</div>
-
-
-
 
   <section style="margin: 20px; padding-bottom: 10px;">
     <div class="container new-arrivals" id="blog">

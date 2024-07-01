@@ -1,0 +1,55 @@
+<div class="formulario-editar form-container">
+  <div class="product-image">
+    <img [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}">
+  </div>
+  <div class="product-details">
+    <p class="product-name">{{ producto.nombreProducto }}</p>
+    <div class="prices">
+      <p class="product-price">S/ {{ producto.precioProducto }}</p>
+      <p class="product-price-increase">S/ {{ (producto.precioProducto * 1.3).toFixed(2) }}</p>
+    </div>
+    
+    <div class="product-sizes">
+      <div *ngIf="isTallaAvailable('S') else noStockS">
+        <div id="size-s" class="size-btn" (click)="selectSize('S')" [ngClass]="{'selected': tallaSeleccionada === 'S'}">S</div>
+      </div>
+      <ng-template #noStockS>
+        <div id="size-s" class="size-btn disabled">S</div>
+      </ng-template>
+      
+      <div *ngIf="isTallaAvailable('M') else noStockM">
+        <div id="size-m" class="size-btn" (click)="selectSize('M')" [ngClass]="{'selected': tallaSeleccionada === 'M'}">M</div>
+      </div>
+      <ng-template #noStockM>
+        <div id="size-m" class="size-btn disabled">M</div>
+      </ng-template>
+      
+      <div *ngIf="isTallaAvailable('L') else noStockL">
+        <div id="size-l" class="size-btn" (click)="selectSize('L')" [ngClass]="{'selected': tallaSeleccionada === 'L'}">L</div>
+      </div>
+      <ng-template #noStockL>
+        <div id="size-l" class="size-btn disabled">L</div>
+      </ng-template>
+    </div>
+
+    <div class="product-quantity">
+      <input type="number" id="quantity" min="1" [(ngModel)]="quantity">
+      <button type="button" (click)="addToCart()">Agregar al Carro</button>
+    </div>
+    
+    <div class="product-delivery">
+      <p>Ica, Ica</p>
+      <p class="availability">Disponible</p>
+      <div class="delivery-options">
+        <div class="delivery-option">
+          <img src="https://oechsle.vteximg.com.br/arquivos/despacho-20230919.svg" alt="Envío Programado">
+          <p>Envío Programado</p>
+        </div>
+        <div class="delivery-option">
+          <img src="https://oechsle.vteximg.com.br/arquivos/retiro-20230919.svg" alt="Retiro en tienda">
+          <p>Retiro en tienda</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="products-list">
+    <h2>Productos en el Carrito</h2>
+    <div *ngFor="let carrito of carritos" class="product-item">
+      <img [src]="carrito.imagenProducto" alt="{{carrito.nombreProducto}}">
+      <span class="product-name">{{carrito.nombreProducto}}</span>
+      <span class="product-category">{{carrito.catProducto}}</span>
+      <div class="product-controls">
+        <select [(ngModel)]="carrito.talla" (change)="actualizarCarrito(carrito)">
+          <option *ngFor="let talla of obtenerTallasDisponibles(carrito)" [value]="talla">{{talla}}</option>
+        </select>
+        <input type="number" [(ngModel)]="carrito.cantidadProducto" (change)="actualizarCarrito(carrito)" min="1">
+      </div>
+      <span class="product-price">S/. {{carrito.precioProducto}}</span>
+      <button class="view-details-button" (click)="eliminarProducto(carrito.idCarrito)">
+        <img src="https://static.vecteezy.com/system/resources/previews/009/344/493/original/x-transparent-free-png.png" alt="Eliminar producto">
+      </button>
+    </div>
+  </div>
+  <div class="cart-summary">
+    <h2>Carrito de Compras</h2>
+    <div class="cart-details">
+      <p><span>Subtotal:</span><span class="price">S/. {{ calcularSubtotal() }}</span></p>
+      <p><span>IGV (18%):</span><span class="price">S/. {{ calcularIGV() }}</span></p>
+      <p><span>Total:</span><span class="price">S/. {{ calcularTotal() }}</span></p>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div *ngIf="cargando" class="loading-overlay">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p>Cargando...</p>
+    </div>
+  </div>
+  
+</div>

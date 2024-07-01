@@ -1,64 +1,66 @@
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
+<section>
+  <div class="container py-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-6 d-none d-md-block">
         <div class="card" style="border-radius: 1rem">
-          <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img
-                src="https://static.wixstatic.com/media/9c608a_a08da405ffbd482e9866dc8bc73a5f4c~mv2_d_3024_3773_s_4_2.jpg/v1/fill/w_565,h_707,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/9c608a_a08da405ffbd482e9866dc8bc73a5f4c~mv2_d_3024_3773_s_4_2.jpg"
-                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem" />
-            </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
-                <form (ngSubmit)="onSubmit()">
-                  <div class="d-flex align-items-center mb-3 pb-1">
-                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
-                    <span class="h1 fw-bold mb-0">LOGIN</span>
-                  </div>
-
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
-                    Iniciar sesión en su cuenta
-                  </h5>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control form-control-lg" placeholder="ingrese su correo"
-                       name="correo" ormControlName="username" required />
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label">Correo</label>
-                    <input type="email" class="form-control form-control-lg" placeholder="ingrese su correo"
-                       name="correo" formControlName="email" required />
-                  </div>
-
-                  <div data-mdb-input-init class="form-outline mb-4">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-control form-control-lg" placeholder="ingrese su contraseña"
-                      name="contrasena" formControlName="password" required />
-                  </div>
-
-                  <div class="pt-1 mb-4">
-                    <button class="btn btn-dark btn-lg btn-block" [disabled]="registerForm.invalid" type="button">
-                      Login
-                    </button>
-                  </div>
-                  <a class="small text-muted" href="#!">¿Has olvidado tu contraseña?</a><br /><br />
-
-                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block btn-primary"
-                    style="background-color: #dd4b39" type="submit">
-                    <i class="bi bi-google"> </i> Sign in with google</button><br /><br />
-                  <p class="mb-5 pb-lg-2" style="color: #393f81">
-                    ¿No tienes una cuenta?
-                    <a href="#!" style="color: #393f81">Registrar aquí</a>
-                  </p>
-
-                  <a href="#!" class="small text-muted">Terms of use.</a>
-                  <a href="#!" class="small text-muted">Privacy policy</a>
-                </form>
+          <img src="https://st4.depositphotos.com/12985790/25241/i/450/depositphotos_252417332-stock-photo-girlfriend-denim-dress-hand-pocket.jpg"
+            alt="Imagen de formulario de registro" class="img-fluid" style="border-radius: 1rem; height: 100%;" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="card-body p-4 p-lg-5 text-black">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div class="text-center mb-4">
+                <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
+                <span class="h1 fw-bold">REGISTRAR</span>
               </div>
-            </div>
+
+              <div class="mb-4">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" id="dni" class="form-control" placeholder="Ingrese su DNI" formControlName="dni"
+                  required />
+              </div>
+
+              <div class="mb-4">
+                <label for="nombres" class="form-label">Nombres</label>
+                <input type="text" id="nombres" class="form-control" placeholder="Ingrese sus nombres"
+                  formControlName="nombres" required />
+              </div>
+
+              <div class="mb-4">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" id="apellidos" class="form-control" placeholder="Ingrese sus apellidos"
+                  formControlName="apellidos" required />
+              </div>
+
+              <div class="mb-4">
+                <label for="numTelefono" class="form-label">Número de Teléfono</label>
+                <input type="text" id="numTelefono" class="form-control" placeholder="Ingrese su número de teléfono"
+                  formControlName="numTelefono" required />
+              </div>
+
+              <div class="mb-4">
+                <label for="correo" class="form-label">Correo</label>
+                <input type="email" id="correo" class="form-control" placeholder="Ingrese su correo"
+                  formControlName="correo" required />
+              </div>
+
+              <div class="mb-4">
+                <label for="contrasena" class="form-label">Contraseña</label>
+                <input type="password" id="contrasena" class="form-control" placeholder="Ingrese su contraseña"
+                  formControlName="contrasena" required />
+              </div>
+
+              <div class="mb-4 text-center">
+                <button class="btn btn-dark btn-lg" [disabled]="registerForm.invalid" type="submit">Registrar</button>
+              </div>
+
+              <p class="text-center" style="color: #000000; font-weight: 300"> ¿Ya tienes una cuenta?
+                <a (click)="iniciarsesion()" style="cursor: pointer; color: #1a26a3; font-weight: 500">Inicia sesión
+                  aquí</a>
+              </p>
+            </form>
           </div>
         </div>
       </div>

@@ -1,0 +1,197 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 20px;
+}
+
+.product-image {
+  flex: 6;
+  margin-right: 50px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.product-details {
+  flex: 7;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.prices {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.product-price,
+.product-price-increase {
+  font-size: 24px;
+}
+
+.product-price-increase {
+  color: red;
+  text-decoration: line-through;
+}
+
+.product-sizes {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.size-btn {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  background-color: #f1d792;
+  cursor: pointer;
+}
+
+.size-btn.selected {
+  background-color: #f09b3d;
+}
+
+.product-quantity {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.product-quantity input {
+  width: 60px;
+  padding: 10px;
+}
+
+.product-quantity button {
+  padding: 12px 24px;
+  cursor: pointer;
+  background-color: #f0c14b;
+  border: 1px solid #f0c14b;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.product-quantity button:hover {
+  background-color: #f09b3d;
+  border-color: #f09b3d;
+}
+
+.size-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.product-delivery {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.availability {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.delivery-options {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+}
+
+.delivery-option {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.delivery-option img {
+  width: 50px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .form-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-image {
+    flex: initial;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .product-details {
+    text-align: center;
+  }
+
+  .product-name {
+    font-size: 28px;
+    margin-top: 10px;
+  }
+
+  .prices {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .product-price,
+  .product-price-increase {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .product-sizes {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 15px;
+  }
+
+  .size-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .product-quantity {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .product-quantity input {
+    width: 100px;
+  }
+
+  .product-quantity button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .delivery-options {
+    justify-content: center;
+  }
+}

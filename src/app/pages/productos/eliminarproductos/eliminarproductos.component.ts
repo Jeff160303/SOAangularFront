@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-eliminarproductos',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
   templateUrl: './eliminarproductos.component.html',
   styleUrl: './eliminarproductos.component.css'
 })
-export class EliminarproductosComponent {
+export class EliminarproductosComponent implements OnInit {
 
   productos: any[] = [];
 
@@ -23,16 +24,6 @@ export class EliminarproductosComponent {
     this.http.get<any[]>('http://localhost:8080/productos/listarproducto').subscribe(
       (data) => {
         this.productos = data;
-        this.productos.forEach(producto => {
-          this.http.get<any[]>(`http://localhost:8080/productos/listarDetalleProductoPorIdProducto/${producto.idproducto}`).subscribe(
-            (detalles) => {
-              producto.detalles = detalles;
-            },
-            (error) => {
-              console.error('Error al obtener detalles del producto:', error);
-            }
-          );
-        });
       },
       (error) => {
         console.error('Error al obtener la lista de productos:', error);
@@ -43,19 +34,28 @@ export class EliminarproductosComponent {
   eliminarProducto(id: number): void {
     const confirmacion = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
     if (confirmacion) {
-        console.log('Eliminando producto con ID:', id);
-        this.http.delete(`http://localhost:8080/productos/eliminarProductoyDetalle/${id}`)
-            .subscribe({
-                next: () => {
-                    console.log('Producto eliminado');
-                    this.cargarProductos(); // Recargar la lista de productos
-                },
-                error: (err) => {
-                    console.error('Error al eliminar el producto:', err);
-                }
-            });
+      console.log('Eliminando producto con ID:', id);
+      this.http.delete(`http://localhost:8080/productos/eliminarProducto/${id}`).subscribe({
+        next: () => {
+          console.log('Producto eliminado');
+          Swal.fire({
+            title: 'Correcto',
+            text: 'Producto Eliminado',
+            icon: 'success',
+          });
+          this.cargarProductos();
+        },
+        error: (err) => {
+          console.error('Error al eliminar el producto:', err);
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo eliminar el Producto',
+            icon: 'error',
+          });
+        }
+      });
     } else {
-        console.log('Eliminación cancelada');
+      console.log('Eliminación cancelada');
     }
-  } 
+  }
 }

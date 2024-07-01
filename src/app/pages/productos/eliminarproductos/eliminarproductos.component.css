@@ -1,10 +1,8 @@
-/* Estilos para el contenedor de la tabla */
 .table-container {
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Estilos para la tabla */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -26,7 +24,6 @@
   background-color: #f5f5f5;
 }
 
-/* Estilos para los botones de acción */
 .action-button {
   padding: 8px 16px;
   cursor: pointer;
@@ -41,7 +38,6 @@
   background-color: #0056b3;
 }
 
-/* Estilos para la información del producto */
 .product-info {
   padding: 10px;
 }
@@ -58,7 +54,6 @@
   color: #555;
 }
 
-/* Estilos para la lista de detalles */
 .detail-list {
   list-style-type: none;
   padding: 0;

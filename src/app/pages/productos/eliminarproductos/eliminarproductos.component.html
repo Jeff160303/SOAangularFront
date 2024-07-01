@@ -3,7 +3,6 @@
     <thead>
       <tr>
         <th>Producto</th>
-        <th>Detalles</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -17,14 +16,7 @@
           </div>
         </td>
         <td>
-          <ul class="detail-list">
-            <li *ngFor="let detalle of producto.detalles">
-              Talla: {{ detalle.tallas }} - Stock: {{ detalle.stock }}
-            </li>
-          </ul>
-        </td>
-        <td>
-          <button class="action-button" (click)="eliminarProducto(producto.idproducto)">Eliminar</button>
+          <button class="action-button" (click)="eliminarProducto(producto.idProducto)">Eliminar</button>
         </td>
       </tr>
     </tbody>
