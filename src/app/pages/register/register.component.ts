@@ -55,7 +55,7 @@ export class RegisterComponent {
             console.error('Error en el registro', error);
             Swal.fire({
               title: 'Lo sentimos',
-              text: 'Hubo un problema al intentar registrar el usuario.',
+              text: 'Hubo un problema al intentar registrar el usuario. Por favor, intenta nuevamente más tarde.',
               icon: 'error',
             });
           }

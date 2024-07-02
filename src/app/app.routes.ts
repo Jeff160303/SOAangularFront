@@ -11,6 +11,7 @@ import { FormularioeditarComponent } from './pages/productos/formularioeditar/fo
 import { EliminarproductosComponent } from './pages/productos/eliminarproductos/eliminarproductos.component';
 import { DetalleProductoComponent } from './pages/detalle-producto/detalle-producto.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
+import { DesconectadoComponent } from './reusables/desconectado/desconectado.component';
 
 export const routes: Routes = [
   {
@@ -78,6 +79,10 @@ export const routes: Routes = [
       {
         path: 'carrito',
         component: CarritoComponent
+      },
+      {
+        path: 'desconectado',
+        component: DesconectadoComponent
       }
     ]
   }

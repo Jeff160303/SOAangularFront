@@ -18,10 +18,15 @@ export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    this.http.get<Producto[]>('http://localhost:8080/productos/listarproducto').subscribe(data => {
-      this.productosMostrados = data.slice(0, 6);
-      this.actualizarURLImagenes();
-    });
+    this.http.get<Producto[]>('http://localhost:8080/productos/listarproducto').subscribe(
+      data => {
+        this.productosMostrados = data.slice(0, 6);
+        this.actualizarURLImagenes();
+      },
+      error => {
+        this.router.navigateByUrl('/desconectado');
+      }
+    );
   }
 
   detalleProducto(idProducto: number): void {

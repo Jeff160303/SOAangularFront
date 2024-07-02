@@ -22,8 +22,8 @@ export class EditarproductosComponent implements OnInit {
       (data) => {
         this.productos = data;
       },
-      (error) => {
-        console.error('Error al obtener la lista de productos:', error);
+      error => {
+        this.router.navigateByUrl('/desconectado');
       }
     );
   }

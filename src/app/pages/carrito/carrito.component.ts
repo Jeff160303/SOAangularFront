@@ -37,7 +37,11 @@ export class CarritoComponent implements OnInit {
       this.carritos.forEach(carrito => {
         this.cargarDetallesProducto(carrito);
       });
-    });
+    },
+    error => {
+      this.router.navigateByUrl('/desconectado');
+    }
+  );
   }
 
   cargarDetallesProducto(carrito: any): void {
@@ -47,13 +51,20 @@ export class CarritoComponent implements OnInit {
       carrito.precioProducto = detalle.precioProducto;
       carrito.imagenProducto = `http://localhost:8080/imagenes/${detalle.imagenProducto}`;
       carrito.detalle = detalle;
+    },
+    error => {
+      this.router.navigateByUrl('/desconectado');
     });
   }
+  
 
   obtenerTallasDisponibles(carrito: any): string[] {
     const tallas = ['S', 'M', 'L'];
-    return tallas.filter(talla => carrito.detalle[`talla${talla}`] > 0);
-  }
+    if (carrito.detalle) {
+      return tallas.filter(talla => carrito.detalle[`talla${talla}`] > 0);
+    }
+    return [];
+  }  
 
   actualizarCarrito(carrito: any): void {
     this.cargando = true;

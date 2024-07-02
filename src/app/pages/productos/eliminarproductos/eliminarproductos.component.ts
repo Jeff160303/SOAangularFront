@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +15,7 @@ export class EliminarproductosComponent implements OnInit {
 
   productos: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -25,8 +26,8 @@ export class EliminarproductosComponent implements OnInit {
       (data) => {
         this.productos = data;
       },
-      (error) => {
-        console.error('Error al obtener la lista de productos:', error);
+      error => {
+        this.router.navigateByUrl('/desconectado');
       }
     );
   }

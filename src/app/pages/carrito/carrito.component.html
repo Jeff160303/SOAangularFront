@@ -1,29 +1,39 @@
 <div class="container">
   <div class="products-list">
-    <h2>Productos en el Carrito</h2>
+    <h2>Carrito</h2>
     <div *ngFor="let carrito of carritos" class="product-item">
-      <img [src]="carrito.imagenProducto" alt="{{carrito.nombreProducto}}">
-      <span class="product-name">{{carrito.nombreProducto}}</span>
-      <span class="product-category">{{carrito.catProducto}}</span>
-      <div class="product-controls">
-        <select [(ngModel)]="carrito.talla" (change)="actualizarCarrito(carrito)">
-          <option *ngFor="let talla of obtenerTallasDisponibles(carrito)" [value]="talla">{{talla}}</option>
-        </select>
-        <input type="number" [(ngModel)]="carrito.cantidadProducto" (change)="actualizarCarrito(carrito)" min="1">
+      <div class="product-image">
+        <img [src]="carrito.imagenProducto" alt="{{carrito.nombreProducto}}">
       </div>
-      <span class="product-price">S/. {{carrito.precioProducto}}</span>
-      <button class="view-details-button" (click)="eliminarProducto(carrito.idCarrito)">
-        <img src="https://static.vecteezy.com/system/resources/previews/009/344/493/original/x-transparent-free-png.png" alt="Eliminar producto">
-      </button>
+      <div class="product-details">
+        <span class="product-name">{{carrito.nombreProducto}}</span>
+        <span class="product-gender">Género: {{carrito.catProducto}}</span>
+        <span class="product-size">Talla: {{carrito.talla}}</span>
+      </div>
+      <div class="price-details">
+        <span class="product-discounted-price">S/. {{carrito.precioProducto}}</span> <span class="product-discount">-30%</span>
+        <span class="product-price">S/. {{carrito.precioProducto * 1.3 | number: '1.2-2'}}</span>
+        
+      </div>
+      <div class="product-controls">
+        <input type="number" [(ngModel)]="carrito.cantidadProducto" (change)="actualizarCarrito(carrito)" min="1">
+        <span>Máx 10 unidades</span>
+      </div>
+      <div class="product-actions">
+        <button class="remove-button" (click)="eliminarProducto(carrito.idCarrito)">
+          <img src="https://static.vecteezy.com/system/resources/previews/009/344/493/original/x-transparent-free-png.png" alt="Eliminar producto">
+        </button>
+      </div>
     </div>
   </div>
   <div class="cart-summary">
-    <h2>Carrito de Compras</h2>
+    <h2>Resumen de la orden</h2>
     <div class="cart-details">
       <p><span>Subtotal:</span><span class="price">S/. {{ calcularSubtotal() }}</span></p>
       <p><span>IGV (18%):</span><span class="price">S/. {{ calcularIGV() }}</span></p>
       <p><span>Total:</span><span class="price">S/. {{ calcularTotal() }}</span></p>
     </div>
+    <button class="process-purchase">Procesar la compra</button>
   </div>
 
   <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
@@ -34,5 +44,4 @@
       <p>Cargando...</p>
     </div>
   </div>
-  
 </div>
