@@ -1,52 +1,71 @@
 <div class="profile-container">
-    <div *ngIf="userData" class="profile-content">
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <h4>Perfil</h4>
+  <div *ngIf="userData" class="profile-content">
+    <h4 class="mb-3">Perfil</h4>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="labels">Nombres</label>
+        <input type="text" class="form-control" [value]="userData.nombres ? userData.nombres : 'No hay nombres registrados'" readonly>
       </div>
-      <div class="row mt-1">
-        <div class="col-md-6">
-          <label class="labels">Nombres</label>
-          <input type="text" class="form-control" placeholder="{{userData.nombres ? userData.nombres : 'No hay nombres registrados'}}" readonly>
-        </div>
-        <div class="col-md-6">
-          <label class="labels">Apellidos</label>
-          <input type="text" class="form-control" placeholder="{{userData.apellidos ? userData.apellidos : 'No hay apellidos registrados'}}" readonly>
-        </div>
-        <div class="col-md-6">
-          <label class="labels">DNI</label>
-          <input type="text" class="form-control" placeholder="{{userData.dni ? userData.dni : 'No hay DNI registrado'}}" readonly>
-        </div>
-        <div class="col-md-6">
-          <label class="labels">Número de teléfono</label>
-          <input type="text" class="form-control" placeholder="{{userData.numTelefono ? userData.numTelefono : 'No hay telefono registrado'}}" readonly>
-        </div>
-        <div class="col-md-12">
-          <label class="labels">Direccion 1</label>
-          <input type="text" class="form-control" placeholder="direccion 1">
-        </div>
-        <div class="col-md-12">
-          <label class="labels">Direccion 2</label>
-          <input type="text" class="form-control" placeholder="direccion 2">
-        </div>
-        <div class="col-md-6">
-          <label class="labels">Codigo Postal (direccion 1)</label>
-          <input type="text" class="form-control" placeholder="Codigo postal 1">
-        </div>
-        <div class="col-md-6">
-          <label class="labels">Codigo Postal (direccion 2)</label>
-          <input type="text" class="form-control" placeholder="Codigo postal 2">
-        </div>
-        <div class="col-md-12">
-          <label class="labels">Email</label>
-          <input type="text" class="form-control" placeholder="{{userData.correo ? userData.correo : 'No hay correo registrado'}}" readonly>
+      <div class="col-md-6 mb-3">
+        <label class="labels">Apellidos</label>
+        <input type="text" class="form-control" [value]="userData.apellidos ? userData.apellidos : 'No hay apellidos registrados'" readonly>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="labels">DNI</label>
+        <input type="text" class="form-control" [value]="userData.dni ? userData.dni : 'No hay DNI registrado'" readonly>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="labels">Número de teléfono</label>
+        <input type="text" class="form-control" [value]="userData.numTelefono ? userData.numTelefono : 'No hay teléfono registrado'" readonly>
+      </div>
+
+      <div class="col-md-12 mb-3" *ngFor="let detalle of detallesUsuario; let i = index">
+        <div class="row align-items-center">
+          <div class="col-md-4 mb-3">
+            <label class="labels">Dirección</label>
+            <input type="text" class="form-control" [(ngModel)]="detalle.direccion" [readonly]="!editMode[i]">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="labels">Código Postal</label>
+            <input type="text" class="form-control" [(ngModel)]="detalle.codigoPostal" [readonly]="!editMode[i]">
+          </div>
+          <div class="col-md-4 mb-3 text-center">
+            <button class="btn btn-primary btn-sm mr-2" (click)="editarDireccion(i)">Editar</button>
+            <button class="btn btn-danger btn-sm" (click)="eliminarDireccion(i)">Eliminar</button>
+          </div>
+          <div class="col-md-12 mt-2" *ngIf="editMode[i]">
+            <button class="btn btn-success btn-sm mr-2" (click)="confirmarCambio(i)">Confirmar</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelarEdicion(i)">Cancelar</button>
+          </div>
         </div>
       </div>
-      <div class="mt-3 text-center">
-        <button class="btn btn-primary profile-button" type="button">Guardar Perfil</button>
+
+      <div class="col-md-6 mb-3" *ngIf="agregarDireccionMode">
+        <label class="labels">Dirección</label>
+        <input type="text" class="form-control" [(ngModel)]="direccionTemporal.direccion">
       </div>
-      <div class="mt-2 text-center">
-        <button class="btn btn-danger delete-button" type="button">Eliminar Cuenta</button>
+      <div class="col-md-6 mb-3" *ngIf="agregarDireccionMode">
+        <label class="labels">Código Postal</label>
+        <input type="text" class="form-control" [(ngModel)]="direccionTemporal.codigoPostal">
+      </div>
+      <div class="col-md-12 mb-3" *ngIf="agregarDireccionMode">
+        <button class="btn btn-success btn-sm mr-2" (click)="crearDireccion()">Crear</button>
+        <button class="btn btn-secondary btn-sm" (click)="cancelarAgregarDireccion()">Cancelar</button>
+      </div>
+
+      <div class="col-md-12 mb-3" *ngIf="detallesUsuario.length < 2 && !agregarDireccionMode">
+        <button class="btn btn-success btn-sm" (click)="mostrarFormularioAgregarDireccion()">Agregar Dirección</button>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <label class="labels">Email</label>
+        <input type="text" class="form-control" [value]="userData.correo ? userData.correo : 'No hay correo registrado'" readonly>
       </div>
     </div>
+
+    <div class="text-center">
+      <button class="btn btn-danger delete-button ml-3" type="button" (click)="eliminarCuenta()">Eliminar Cuenta</button>
+    </div>
   </div>
-  
+</div>

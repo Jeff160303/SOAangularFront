@@ -17,30 +17,6 @@ body {
   box-sizing: border-box;
 }
 
-.profile-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.profile-content {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 40px; /* Ensure there's space between profile and footer */
-}
-
-.labels {
-  font-weight: bold;
-  margin-top: 10px;
-}
-
 input[readonly] {
   background-color: #f8f9fa;
   cursor: not-allowed;
@@ -78,4 +54,38 @@ input[readonly] {
 
 .delete-button:hover {
   background-color: #c82333;
+}
+
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-content {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.labels {
+  font-weight: bold;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 10px;
+  }
 }
