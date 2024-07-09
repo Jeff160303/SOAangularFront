@@ -16,7 +16,7 @@
         
       </div>
       <div class="product-controls">
-        <input type="number" [(ngModel)]="carrito.cantidadProducto" (change)="actualizarCarrito(carrito)" min="1">
+        <input type="number" [(ngModel)]="carrito.cantidadProducto" (change)="actualizarCarrito(carrito)" min="1" max="10">
         <span>Máx 10 unidades</span>
       </div>
       <div class="product-actions">

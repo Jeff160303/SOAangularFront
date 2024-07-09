@@ -1,0 +1,52 @@
+<div class="profile-container">
+    <div *ngIf="userData" class="profile-content">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4>Perfil</h4>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-6">
+          <label class="labels">Nombres</label>
+          <input type="text" class="form-control" placeholder="{{userData.nombres ? userData.nombres : 'No hay nombres registrados'}}" readonly>
+        </div>
+        <div class="col-md-6">
+          <label class="labels">Apellidos</label>
+          <input type="text" class="form-control" placeholder="{{userData.apellidos ? userData.apellidos : 'No hay apellidos registrados'}}" readonly>
+        </div>
+        <div class="col-md-6">
+          <label class="labels">DNI</label>
+          <input type="text" class="form-control" placeholder="{{userData.dni ? userData.dni : 'No hay DNI registrado'}}" readonly>
+        </div>
+        <div class="col-md-6">
+          <label class="labels">Número de teléfono</label>
+          <input type="text" class="form-control" placeholder="{{userData.numTelefono ? userData.numTelefono : 'No hay telefono registrado'}}" readonly>
+        </div>
+        <div class="col-md-12">
+          <label class="labels">Direccion 1</label>
+          <input type="text" class="form-control" placeholder="direccion 1">
+        </div>
+        <div class="col-md-12">
+          <label class="labels">Direccion 2</label>
+          <input type="text" class="form-control" placeholder="direccion 2">
+        </div>
+        <div class="col-md-6">
+          <label class="labels">Codigo Postal (direccion 1)</label>
+          <input type="text" class="form-control" placeholder="Codigo postal 1">
+        </div>
+        <div class="col-md-6">
+          <label class="labels">Codigo Postal (direccion 2)</label>
+          <input type="text" class="form-control" placeholder="Codigo postal 2">
+        </div>
+        <div class="col-md-12">
+          <label class="labels">Email</label>
+          <input type="text" class="form-control" placeholder="{{userData.correo ? userData.correo : 'No hay correo registrado'}}" readonly>
+        </div>
+      </div>
+      <div class="mt-3 text-center">
+        <button class="btn btn-primary profile-button" type="button">Guardar Perfil</button>
+      </div>
+      <div class="mt-2 text-center">
+        <button class="btn btn-danger delete-button" type="button">Eliminar Cuenta</button>
+      </div>
+    </div>
+  </div>
+  

@@ -12,6 +12,8 @@ import { EliminarproductosComponent } from './pages/productos/eliminarproductos/
 import { DetalleProductoComponent } from './pages/detalle-producto/detalle-producto.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { DesconectadoComponent } from './reusables/desconectado/desconectado.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { DeliveryComponent } from './pages/delivery/delivery.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +53,14 @@ export const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: 'perfil',
+        component: PerfilComponent
+      },
+      {
+        path: 'delivery',
+        component: DeliveryComponent
       },
       {
         path: 'productos',

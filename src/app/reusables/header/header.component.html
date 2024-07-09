@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#">Tienda Online</a>
+    <a class="navbar-brand" href="#">APACHE STORE</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -32,14 +32,20 @@
             <img src="https://static.thenounproject.com/png/736543-200.png" alt="Registrarse" style="width: 20px; margin-right: 5px;">Registrarse
           </a>
         </div>
-        <div *ngIf="userData" class="user-details d-flex align-items-center">
-          <h6 class="text-dark" style="margin-right: 15px;">Welcome, <span>{{ userData.nombres }} {{ userData.apellidos }}</span></h6>
-          <a class="nav-link text-dark" (click)="sesion()">Cerrar Sesión</a>
+        <div *ngIf="userData" class="btn-group">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <span>{{ userData.nombres }} {{ userData.apellidos }}</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" (click)="perfil()" type="button">Perfil</a></li>
+            <li><a class="dropdown-item" (click)="delivery()" type="button">Deliver</a></li>
+            <li><a class="dropdown-item" (click)="sesion()" type="button">Cerrar Sesión</a></li>
+          </ul>
         </div>
         <div *ngIf="userData" class="cart position-relative" (click)="carrito()">
           <span class="badge badge-danger position-absolute top-0 start-100 translate-middle" style="color: red;">{{ cantidadProductosEnCarrito }}</span>
           <span><i class="bi bi-cart4 text-dark"></i></span>
-        </div>        
+        </div>
       </div>
     </div>
   </div>

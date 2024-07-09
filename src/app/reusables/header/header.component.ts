@@ -40,6 +40,14 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/register');
   }
 
+  delivery(){
+    this.router.navigateByUrl('/delivery');
+  }
+
+  perfil(){
+    this.router.navigateByUrl('/perfil');
+  }
+
   inicio(){
     this.router.navigateByUrl('/');
   }
