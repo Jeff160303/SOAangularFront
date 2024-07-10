@@ -16,13 +16,15 @@ import { Router } from '@angular/router';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent {
-  userData: UserData | null = null;
+  userData: any | null = null;
   detallesUsuario: DetalleUsuario[] = [];
   editMode: boolean[] = [];
   agregarDireccionMode: boolean = false;
   direccionTemporal: DetalleUsuario = { idDetalleUsuarios: 0, dni: '', direccion: '', codigoPostal: '' };
 
-  constructor(private authService: AuthService, private http: HttpClient, private router: Router ) {}
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router ) {
+    this.userData = this.authService.getUserData();
+  }
 
   ngOnInit() {
     this.authService.userData$.subscribe(userData => {
@@ -211,6 +213,57 @@ export class PerfilComponent {
               icon: 'error',
               confirmButtonText: 'Aceptar'
             });
+          });
+      }
+    });
+  }
+
+  cambiarContrasena() {
+    Swal.fire({
+      title: 'Cambiar Contraseña',
+      html:
+        '<input id="swal-input1" class="swal2-input" type="password" placeholder="Contraseña Actual">' +
+        '<input id="swal-input2" class="swal2-input" type="password" placeholder="Nueva Contraseña">' +
+        '<input id="swal-input3" class="swal2-input" type="password" placeholder="Confirmar Nueva Contraseña">',
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      preConfirm: () => {
+        const contrasenaActual = (document.getElementById('swal-input1') as HTMLInputElement).value;
+        const nuevaContrasena = (document.getElementById('swal-input2') as HTMLInputElement).value;
+        const confirmarContrasena = (document.getElementById('swal-input3') as HTMLInputElement).value;
+
+        if (!contrasenaActual || !nuevaContrasena || !confirmarContrasena) {
+          Swal.showValidationMessage('Todos los campos son obligatorios');
+          return false;
+        }
+
+        if (nuevaContrasena !== confirmarContrasena) {
+          Swal.showValidationMessage('Las contraseñas nuevas no coinciden');
+          return false;
+        }
+
+        return { contrasenaActual, nuevaContrasena };
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const payload = {
+          dni: this.userData.dni,
+          contrasenaActual: result.value.contrasenaActual,
+          nuevaContrasena: result.value.nuevaContrasena
+        };
+
+        this.http.put<number>('http://localhost:8090/usuarios/actualizar', payload)
+          .subscribe(response => {
+            if (response > 0) {
+              Swal.fire('¡Éxito!', 'Tu contraseña ha sido cambiada correctamente.', 'success');
+            } else {
+              Swal.fire('Error', 'Hubo un problema al cambiar tu contraseña. Verifica los datos proporcionados.', 'error');
+            }
+          }, error => {
+            console.error('Error al cambiar la contraseña:', error);
+            Swal.fire('Error', 'Hubo un problema al cambiar tu contraseña. Inténtalo nuevamente más tarde.', 'error');
           });
       }
     });

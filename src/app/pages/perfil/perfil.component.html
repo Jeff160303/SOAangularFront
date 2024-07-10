@@ -62,10 +62,24 @@
         <label class="labels">Email</label>
         <input type="text" class="form-control" [value]="userData.correo ? userData.correo : 'No hay correo registrado'" readonly>
       </div>
+      <div class="form-group row">
+        <div class="col-md-12 mb-3 d-flex align-items-center">
+            <div class="flex-grow-1">
+                <label for="password" class="col-form-label">Contraseña</label>
+                <input type="password" id="password" class="form-control" value="password" readonly>
+            </div>
+            <div style="margin-top: 22px; margin-left: 20px; margin-right: -24px;" class="ml-3">
+                <button class="btn btn-warning" type="button" (click)="cambiarContrasena()">Cambiar Contraseña</button>
+            </div>
+        </div>
+    </div>
+    
+    
     </div>
 
     <div class="text-center">
       <button class="btn btn-danger delete-button ml-3" type="button" (click)="eliminarCuenta(userData.dni)">Eliminar Cuenta</button>
     </div>
+    
   </div>
 </div>

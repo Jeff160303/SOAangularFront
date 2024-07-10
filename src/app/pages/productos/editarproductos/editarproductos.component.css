@@ -15,8 +15,9 @@
   color: white;
 }
 
-.table th, .table td {
+.table th {
   padding: 15px;
+  margin-left: 5px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -33,6 +34,10 @@
   border: none;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+}
+
+td button{
+  margin: 5px;
 }
 
 .action-button:hover {
@@ -63,6 +68,7 @@
 
 .detail-list li {
   margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 .detail-list span {

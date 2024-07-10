@@ -64,10 +64,6 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/editarproductos');
   }
 
-  eliminarproductos() {
-    this.router.navigateByUrl('/eliminarproductos');
-  }
-
   carrito(){
     this.router.navigateByUrl('/carrito')
   }

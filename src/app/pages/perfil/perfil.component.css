@@ -48,6 +48,7 @@ input[readonly] {
   border: none;
   color: white;
   padding: 10px 20px;
+  margin-top: 80px;
   cursor: pointer;
   border-radius: 5px;
 }

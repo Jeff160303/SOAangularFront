@@ -8,7 +8,6 @@ import { ListarproductosComponent } from './pages/listarproductos/listarproducto
 import { CrearproductosComponent } from './pages/productos/crearproductos/crearproductos.component';
 import { EditarproductosComponent } from './pages/productos/editarproductos/editarproductos.component';
 import { FormularioeditarComponent } from './pages/productos/formularioeditar/formularioeditar.component';
-import { EliminarproductosComponent } from './pages/productos/eliminarproductos/eliminarproductos.component';
 import { DetalleProductoComponent } from './pages/detalle-producto/detalle-producto.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { DesconectadoComponent } from './reusables/desconectado/desconectado.component';
@@ -81,10 +80,6 @@ export const routes: Routes = [
       {
         path: 'detalleProducto/:id',
         component: DetalleProductoComponent
-      },
-      {
-        path: 'eliminarproductos',
-        component: EliminarproductosComponent
       },
       {
         path: 'carrito',

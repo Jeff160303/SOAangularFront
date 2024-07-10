@@ -17,10 +17,7 @@
           <a class="nav-link" (click)="crearproductos()">Crear Producto</a>
         </li>
         <li class="nav-item" *ngIf="userData?.rol === 'administrador'">
-          <a class="nav-link" (click)="editarproductos()">Editar Producto</a>
-        </li>
-        <li class="nav-item" *ngIf="userData?.rol === 'administrador'">
-          <a class="nav-link" (click)="eliminarproductos()">Eliminar Producto</a>
+          <a class="nav-link" (click)="editarproductos()">Administrar Productos</a>
         </li>
       </ul>
       <div class="d-flex align-items-center">
