@@ -6,6 +6,7 @@ import { catchError, throwError } from 'rxjs';
 import { DetalleUsuario } from '../../models/detalles.models';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -21,7 +22,7 @@ export class PerfilComponent {
   agregarDireccionMode: boolean = false;
   direccionTemporal: DetalleUsuario = { idDetalleUsuarios: 0, dni: '', direccion: '', codigoPostal: '' };
 
-  constructor(private authService: AuthService, private http: HttpClient) {}
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router ) {}
 
   ngOnInit() {
     this.authService.userData$.subscribe(userData => {
@@ -164,8 +165,55 @@ export class PerfilComponent {
     });
   }
 
-  eliminarCuenta() {
-    
+  eliminarCuenta(dni: string) {
+    const codigo = Math.floor(1000 + Math.random() * 9000).toString();
+
+    Swal.fire({
+      title: 'Confirmación de eliminación',
+      text: `Ingresa el siguiente código para confirmar: ${codigo}`,
+      input: 'text',
+      inputPlaceholder: 'Ingrese el código de 4 dígitos',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      preConfirm: (inputValue) => {
+        if (inputValue !== codigo) {
+          Swal.showValidationMessage('El código ingresado es incorrecto');
+        }
+        return inputValue === codigo;
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.http.delete<number>(`http://localhost:8090/usuarios/eliminar/${dni}`)
+          .subscribe(resultado => {
+            console.log('Cuenta eliminada con éxito');
+
+            Swal.fire(
+              '¡Eliminado!',
+              'Tu cuenta ha sido eliminada correctamente.',
+              'success'
+            );
+
+            if (this.authService.getUserRole() !== 'error') {
+              this.authService.clearUser();
+              this.router.navigateByUrl('/');
+            } else {
+              this.router.navigateByUrl('/login');
+            }
+            
+
+          }, error => {
+            console.error('Error al eliminar cuenta:', error);
+
+            Swal.fire({
+              title: 'Error',
+              text: 'Hubo un problema al intentar eliminar tu cuenta.',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          });
+      }
+    });
   }
 
   generarIdUnico(): number {
