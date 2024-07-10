@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/producto.model';
 import { CarritoService } from '../../carrito.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrito',
@@ -17,6 +18,7 @@ import { CarritoService } from '../../carrito.service';
 export class CarritoComponent implements OnInit {
   userData: UserData | null = null;
   carritos: any[] = [];
+  totalAmount: number = 0;
   cargando: boolean = false;
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, private carritoService: CarritoService) {}
@@ -108,21 +110,91 @@ export class CarritoComponent implements OnInit {
   }
 
   calcularSubtotal(): string {
-    const total = parseFloat(this.calcularTotal());
-    const igv = parseFloat(this.calcularIGV());
+    const total = this.calcularTotal();
+    const igv = total * 0.18;
     const subtotal = total - igv;
     return subtotal.toFixed(2);
   }
-  
+
   calcularIGV(): string {
-    const total = parseFloat(this.calcularTotal());
+    const total = this.calcularTotal();
     const igv = total * 0.18;
     return igv.toFixed(2);
   }
 
-  calcularTotal(): string {
+  calcularTotal(): number {
     const total = this.carritos.reduce((acc, carrito) => acc + (carrito.precioProducto * carrito.cantidadProducto), 0);
-    return total.toFixed(2);
+    return total;
+  }
+
+  private calcularTotalAmount(): number {
+    return this.calcularTotal();
+  }
+
+  handleSuccessfulPayment() {
+    console.log('Handling successful payment...');
+
+    Swal.fire({
+      title: 'Procesando compra...',
+      text: 'Por favor espera un momento.',
+      icon: 'info',
+      allowOutsideClick: false,
+      showConfirmButton: false
+    });
+
+    if (this.userData && this.carritos.length > 0) {
+      const venta = {
+        fechaEmision: new Date(),
+        dni: this.userData.dni,
+        nombres: this.userData.nombres,
+        apellidos: this.userData.apellidos,
+        tipoVenta: 'pedido',
+        direccion: 'Dirección del usuario',
+        total: this.calcularTotalAmount(),
+        estado: 'pendiente'
+      };
+
+      const detalles = this.carritos.map(carrito => ({
+        nombreProducto: carrito.nombreProducto,
+        cantProducto: carrito.cantidadProducto,
+        tallaProducto: carrito.talla,
+        precioProducto: carrito.precioProducto
+      }));
+
+      const payload = {
+        email: this.userData.correo,
+        venta: venta,
+        detalles: detalles
+      };
+
+      console.log('Sending payload to backend:', payload);
+
+      this.http.post('http://localhost:8060/email/boleta', payload)
+        .subscribe(
+          response => {
+            console.log('Respuesta del servidor:', response);
+            Swal.fire({
+              title: 'Compra exitosa',
+              text: 'La boleta ha sido enviada por correo.',
+              icon: 'success'
+            });
+          },
+          error => {
+            console.error('Error al enviar la boleta:', error);
+            Swal.fire({
+              title: 'Error',
+              text: 'Ocurrió un error al enviar la boleta.',
+              icon: 'error'
+            });
+          }
+        );
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se encontraron productos en el carrito o no se encontraron datos de usuario.',
+        icon: 'error'
+      });
+    }
   }
   
   
