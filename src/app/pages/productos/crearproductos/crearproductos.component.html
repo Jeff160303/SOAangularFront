@@ -7,8 +7,11 @@
     </div>
     <div class="form-group">
       <label for="catProducto">Genero Producto: (Hombre, Mujer)</label>
-      <input type="text" id="catProducto" [(ngModel)]="nuevoProducto.catProducto" name="catProducto" required>
-    </div>
+      <select id="catProducto" [(ngModel)]="nuevoProducto.catProducto" name="catProducto" required>
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+      </select>
+    </div>  
     <div class="form-group">
       <label for="precioProducto">Precio Producto:</label>
       <input type="number" id="precioProducto" [(ngModel)]="nuevoProducto.precioProducto" name="precioProducto" required>
