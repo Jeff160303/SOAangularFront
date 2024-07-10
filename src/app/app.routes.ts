@@ -13,6 +13,7 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 import { DesconectadoComponent } from './reusables/desconectado/desconectado.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
+import { PaymentComponent } from './pages/ventas/payment/payment.component';
 
 export const routes: Routes = [
   {
@@ -88,6 +89,10 @@ export const routes: Routes = [
       {
         path: 'desconectado',
         component: DesconectadoComponent
+      },
+      {
+        path: 'payment',
+        component: PaymentComponent
       }
     ]
   }
