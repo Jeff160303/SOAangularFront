@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/producto.model';
 import { CarritoService } from '../../carrito.service';
 import Swal from 'sweetalert2';
+import { PaymentService } from '../ventas/payment.service';
+
+declare var Stripe: any; 
 
 @Component({
   selector: 'app-carrito',
@@ -21,7 +24,7 @@ export class CarritoComponent implements OnInit {
   totalAmount: number = 0;
   cargando: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService, private carritoService: CarritoService) {}
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService, private carritoService: CarritoService,private paymentService: PaymentService) {}
 
   ngOnInit(): void {
     this.authService.userData$.subscribe(userData => {
@@ -130,6 +133,34 @@ export class CarritoComponent implements OnInit {
   private calcularTotalAmount(): number {
     return this.calcularTotal();
   }
+
+
+
+
+
+
+
+
+  makePayment(): void {
+    const amount = this.calcularTotal() * 100;
+    this.paymentService.createCheckoutSession(amount)
+     .then((response: any) => {
+        const sessionId = response.id;
+        const stripe = Stripe('pk_test_51Pb0tI2N50f3xlN2Yu218bz88PY5B8tZsAigCXQEqCdWisHn6vTzzT3stqW6rzumfmIVRZkSgKAmCGitMbwQEy0K00ILTTXvqV');
+        stripe.redirectToCheckout({ sessionId: sessionId });
+      })
+     .catch((error: any) => console.error(error));
+  }
+
+
+
+
+
+
+
+
+
+
 
   handleSuccessfulPayment() {
     console.log('Handling successful payment...');

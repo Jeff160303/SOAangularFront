@@ -33,6 +33,7 @@
       <p><span>IGV (18%):</span><span class="price">S/. {{ calcularIGV() }}</span></p>
       <p><span>Total:</span><span class="price">S/. {{ calcularTotal() }}</span></p>
     </div>
+    <button (click)="makePayment()">Pagar</button>
     <button class="process-purchase" (click)="handleSuccessfulPayment()">Procesar la compra</button>
   </div>
 
