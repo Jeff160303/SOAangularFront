@@ -2,6 +2,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Imagen</th>
         <th>Producto</th>
         <th>Detalles</th>
         <th>Acciones</th>
@@ -10,7 +11,11 @@
     <tbody>
       <tr *ngFor="let producto of productos">
         <td>
+          <img style="width: 80px;" (click)="detalleProducto(producto.idProducto)" [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}">
+        </td>
+        <td>
           <div class="product-info">
+            
             <h3>{{ producto.nombreProducto }}</h3>
             <p>Categoría: {{ producto.catProducto }}</p>
             <p>Precio: {{ producto.precioProducto }}</p>

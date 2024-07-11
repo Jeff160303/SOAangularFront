@@ -26,11 +26,24 @@ export class EditarproductosComponent implements OnInit {
     this.http.get<any[]>('http://localhost:8080/productos/listarproducto').subscribe(
       (data) => {
         this.productos = data;
+        this.actualizarURLImagenes();
       },
       error => {
         this.router.navigateByUrl('/desconectado');
       }
     );
+  }
+
+  actualizarURLImagenes(): void {
+    this.productos.forEach(producto => {
+      if (producto.imagenProducto) {
+        producto.imagenProducto = `http://localhost:8080/imagenes/${producto.imagenProducto}`;
+      }
+    });
+  }
+
+  detalleProducto(idProducto: number): void {
+    this.router.navigate(['/detalleProducto', idProducto]);
   }
 
   editarProducto(idProducto: number): void {
