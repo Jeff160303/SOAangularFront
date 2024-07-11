@@ -6,8 +6,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Producto } from '../../models/producto.model';
 import { CarritoService } from '../../carrito.service';
-import Swal from 'sweetalert2';
 import { PaymentService } from '../ventas/payment.service';
+import { DetalleUsuario } from '../../models/detalles.models';
+import { catchError, throwError } from 'rxjs';
 
 declare var Stripe: any; 
 
@@ -23,6 +24,7 @@ export class CarritoComponent implements OnInit {
   carritos: any[] = [];
   totalAmount: number = 0;
   cargando: boolean = false;
+  detallesUsuario: DetalleUsuario[] = [];
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, private carritoService: CarritoService,private paymentService: PaymentService) {}
 
@@ -31,6 +33,7 @@ export class CarritoComponent implements OnInit {
       this.userData = userData;
       if (this.userData) {
         this.cargarCarrito(this.userData.dni);
+        this.listarDetallesPorDni(this.userData.dni);
       }
     });
   }
@@ -62,6 +65,30 @@ export class CarritoComponent implements OnInit {
     });
   }
   
+  listarDetallesPorDni(dni: string): void {
+    const url = `http://localhost:8090/usuarios/detalle/listar/${dni}`;
+    this.http.get<DetalleUsuario[]>(url)
+      .pipe(
+        catchError(error => {
+          console.error('Error al cargar detalles de usuario:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe(detalles => {
+        const recojoEnTienda: DetalleUsuario = {
+          idDetalleUsuarios: -1,
+          dni: dni,
+          direccion: 'Recojo en Tienda',
+          codigoPostal: '11001'
+        };
+        this.detallesUsuario = [recojoEnTienda, ...detalles];
+      });
+  }
+
+  guardarDireccionSeleccionada(event: any): void {
+    const direccionSeleccionada = event.target.value;
+    localStorage.setItem('direccionSeleccionada', direccionSeleccionada);
+  }
 
   obtenerTallasDisponibles(carrito: any): string[] {
     const tallas = ['S', 'M', 'L'];

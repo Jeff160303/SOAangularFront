@@ -36,6 +36,8 @@ export class ExitoComponent implements OnInit {
 
     this.userData = JSON.parse(localStorage.getItem('userData') || '{}');
     this.carritos = JSON.parse(localStorage.getItem('carritos') || '[]');
+    const direccionSeleccionada = localStorage.getItem('direccionSeleccionada') || 'Recojo en Tienda';
+    console.log('Direccion seleccionada:', direccionSeleccionada);
 
     if (this.userData && this.carritos.length > 0) {
       const venta = {
@@ -44,7 +46,7 @@ export class ExitoComponent implements OnInit {
         nombres: this.userData.nombres,
         apellidos: this.userData.apellidos,
         tipoVenta: 'pedido',
-        direccion: 'Dirección del usuario',
+        direccion: direccionSeleccionada,
         total: this.calcularTotalAmount(this.carritos),
         estado: 'pendiente'
       };
