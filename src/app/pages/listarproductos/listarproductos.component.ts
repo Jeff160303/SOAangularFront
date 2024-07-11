@@ -103,7 +103,6 @@ export class ListarproductosComponent implements OnInit {
               icon: 'success',
             });
             this.actualizarCantidadProductosEnCarrito();
-            // Recargar el carrito después de agregar un nuevo producto
             this.cargarCarrito(this.userData?.dni || '');
           },
           (error) => {
@@ -152,6 +151,15 @@ export class ListarproductosComponent implements OnInit {
           icon: 'error',
         });
       }
+    );
+  }
+
+  buscarProducto(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const query = inputElement.value.toLowerCase();
+  
+    this.productosFiltrados = this.productos.filter(producto =>
+      producto.nombreProducto.toLowerCase().includes(query)
     );
   }
 }
