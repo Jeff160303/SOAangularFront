@@ -19,6 +19,8 @@ export class ListarproductosComponent implements OnInit {
   productos: Producto[] = [];
   productosFiltrados: Producto[] = [];
   filtroActivo: string | null = null;
+  tallaSeleccionada: string | null = null;
+  busqueda: string = '';
   userData: UserData | null = null;
   carritos: any[] = [];
 
@@ -32,8 +34,7 @@ export class ListarproductosComponent implements OnInit {
     },
     error => {
       this.router.navigateByUrl('/desconectado');
-    }
-    );
+    });
     this.authService.userData$.subscribe(userData => {
       this.userData = userData;
       if (this.userData) {
@@ -51,15 +52,15 @@ export class ListarproductosComponent implements OnInit {
   }
 
   filtrarPorGenero(genero: string): void {
-    if (genero === 'Hombre' || genero === 'Mujer') {
-      this.productosFiltrados = this.productos.filter(producto => producto.catProducto === genero);
-      this.filtroActivo = genero;
-    }
+    this.filtroActivo = genero;
+    this.filtrarProductos();
   }
 
   resetearFiltro(): void {
-    this.productosFiltrados = [...this.productos];
     this.filtroActivo = null;
+    this.tallaSeleccionada = null;
+    this.busqueda = '';
+    this.filtrarProductos();
   }
 
   detalleProducto(idProducto: number): void {
@@ -156,10 +157,23 @@ export class ListarproductosComponent implements OnInit {
 
   buscarProducto(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    const query = inputElement.value.toLowerCase();
-  
-    this.productosFiltrados = this.productos.filter(producto =>
-      producto.nombreProducto.toLowerCase().includes(query)
-    );
+    this.busqueda = inputElement.value.toLowerCase();
+    this.filtrarProductos();
   }
+
+  filtrarPorTalla(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.tallaSeleccionada = selectElement.value;
+    this.filtrarProductos();
+  }
+
+  filtrarProductos(): void {
+    this.productosFiltrados = this.productos.filter(producto => {
+      const cumpleGenero = !this.filtroActivo || producto.catProducto === this.filtroActivo;
+      const cumpleTalla = !this.tallaSeleccionada || (producto as any)[`talla${this.tallaSeleccionada}`] > 0;
+      const cumpleBusqueda = !this.busqueda || producto.nombreProducto.toLowerCase().includes(this.busqueda);
+      return cumpleGenero && cumpleTalla && cumpleBusqueda;
+    });
+  }
+
 }

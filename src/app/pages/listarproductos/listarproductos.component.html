@@ -1,7 +1,3 @@
-<div class="search-bar">
-  <input type="text" class="form-control" placeholder="Buscar producto..." (input)="buscarProducto($event)">
-</div>
-
 <div class="filter-bar">
   <button class="filter-button" (click)="filtrarPorGenero('Hombre')" [class.active]="filtroActivo === 'Hombre'">
     <div class="filter-content">
@@ -18,12 +14,20 @@
   <button class="filter-button" (click)="resetearFiltro()" [class.active]="!filtroActivo">
     <div class="filter-content">
       <img src="https://st.depositphotos.com/2097531/2143/i/450/depositphotos_21435719-stock-photo-sexy-man-and-woman-dressed.jpg" alt="Mostrar Todo">
-      <span>Mostrar Todo</span>
+      <span>Resetear Filtro</span>
     </div>
   </button>
 </div>
 
-<hr style="border-width: 5px; border-color:black;">
+<div class="search-bar">
+  <input type="text" class="form-control search-input" placeholder="Buscar producto..." (input)="buscarProducto($event)">
+  <select class="form-control talla-select ml-2" (change)="filtrarPorTalla($event)">
+    <option value="">Todas las tallas</option>
+    <option value="S">Talla S</option>
+    <option value="M">Talla M</option>
+    <option value="L">Talla L</option>
+  </select>
+</div>
 
 <div class="product-list">
   <div *ngFor="let producto of productosFiltrados" class="product-card">

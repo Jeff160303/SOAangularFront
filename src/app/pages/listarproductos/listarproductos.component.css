@@ -3,17 +3,41 @@
   top: 0;
   z-index: 1000;
   background-color: #fff;
-  padding: 10px 0;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
 }
 
-.search-bar input {
-  width: 100%;
-  padding: 10px;
+.search-input {
+  flex: 1;
+  padding: 10px 15px;
   font-size: 14px;
   border: none;
   border-bottom: 2px solid #ccc;
   outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.talla-select {
+  width: auto;
+  margin-left: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.talla-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .filter-bar {
@@ -167,7 +191,7 @@
 }
 
 .pointer {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .product-details {
