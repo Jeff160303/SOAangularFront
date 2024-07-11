@@ -11,33 +11,41 @@
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
-                <form>
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
-                    <span class="h1 fw-bold mb-0">Inicio de Sesion</span>
+                    <span class="h1 fw-bold mb-0">Inicio de Sesión</span>
                   </div>
 
-                  <div data-mdb-input-init class="form-outline mb-4">
+                  <div style="height: 100px;" data-mdb-input-init class="form-outline">
                     <label class="form-label">Correo</label>
-                    <input type="email" class="form-control form-control-lg" placeholder="ingrese su correo"
-                      [(ngModel)]="loginObj.correo" name="correo" required />
+                    <input type="email" class="form-control form-control-lg" placeholder="Ingrese su correo" formControlName="correo" required />
+                    <div *ngIf="loginForm.get('correo')?.invalid && (loginForm.get('correo')?.dirty || loginForm.get('correo')?.touched)" class="text-danger">
+                      <div *ngIf="loginForm.get('correo')?.errors?.['required']">Correo es requerido.</div>
+                      <div *ngIf="loginForm.get('correo')?.errors?.['email']">Correo debe tener un formato válido.</div>
+                    </div>
                   </div>
 
-                  <div data-mdb-input-init class="form-outline mb-4">
+                  <div style="height: 100px;" data-mdb-input-init class="form-outline">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" class="form-control form-control-lg" placeholder="ingrese su contraseña"
-                      [(ngModel)]="loginObj.contrasena" name="contrasena" />
+                    <input type="password" class="form-control form-control-lg" placeholder="Ingrese su contraseña" formControlName="contrasena" required />
+                    <div *ngIf="loginForm.get('contrasena')?.invalid && (loginForm.get('contrasena')?.dirty || loginForm.get('contrasena')?.touched)" class="text-danger">
+                      <div *ngIf="loginForm.get('contrasena')?.errors?.['required']">Contraseña es requerida.</div>
+                      <div *ngIf="loginForm.get('contrasena')?.errors?.['minlength']">Contraseña debe tener al menos 6 caracteres.</div>
+                    </div>
                   </div>
 
                   <div class="pt-1 mb-4">
-                    <button class="btn btn-dark btn-lg btn-block" type="button" (click)="onLogin()">
-                      Iniciar sesion
+                    <button class="btn btn-dark btn-lg btn-block" type="submit" [disabled]="loginForm.invalid">
+                      Iniciar sesión
                     </button>
                   </div>
                   <a class="small text-muted" href="#!">¿Has olvidado tu contraseña?</a>
                   <br />
                   <br />
-                  <p class="mb-5 pb-lg-2" style="color: #000000; font-weight: 300"> ¿No tienes cuenta? <a (click)="SingUp()" type="button" style="color: #1a26a3; font-weight: 500">Registrate aquí</a></p>
+                  <p class="mb-5 pb-lg-2" style="color: #000000; font-weight: 300">¿No tienes cuenta? 
+                    <a (click)="SingUp()" type="button" style="color: #5c340c; font-weight: 500">Regístrate aquí</a>
+                  </p>
                 </form>
               </div>
             </div>

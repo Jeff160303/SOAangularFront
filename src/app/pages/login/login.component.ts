@@ -1,62 +1,62 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService, UserData } from '../../auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [HttpClientModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  loginObj: Login;
+  loginForm: FormGroup;
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
-    this.loginObj = { correo: '', contrasena: '' };
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService) {
+    this.loginForm = this.fb.group({
+      correo: ['', [Validators.required, Validators.email]],
+      contrasena: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
   onLogin() {
-    this.http
-      .post<UserData>('http://localhost:8090/usuarios/iniciarSesion', this.loginObj)
-      .subscribe(
-        (userData: UserData) => {
-          if (userData.rol !== 'error') {
-            this.authService.setUser(userData);
-            Swal.fire({
-              title: 'Bienvenido!',
-              text: 'Acceso correcto!',
-              icon: 'success',
-            });
-            this.router.navigateByUrl('/');
-          } else {
+    if (this.loginForm.valid) {
+      this.http.post<UserData>('http://localhost:8090/usuarios/iniciarSesion', this.loginForm.value)
+        .subscribe(
+          (userData: UserData) => {
+            if (userData.rol !== 'error') {
+              this.authService.setUser(userData);
+              Swal.fire({
+                title: 'Bienvenido!',
+                text: 'Acceso correcto!',
+                icon: 'success',
+              });
+              this.router.navigateByUrl('/');
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: 'Credenciales incorrectas!',
+                icon: 'error',
+              });
+            }
+          },
+          (error: HttpErrorResponse) => {
             Swal.fire({
               title: 'Error!',
-              text: 'Credenciales incorrectas!',
+              text: 'Error de servidor. Por favor, intenta nuevamente más tarde.',
               icon: 'error',
             });
           }
-        },
-        (error: HttpErrorResponse) => {
-          Swal.fire({
-            title: 'Error!',
-            text: 'Error de servidor. Por favor, intenta nuevamente más tarde.',
-            icon: 'error',
-          });
-        }
-      );
+        );
+    }
   }
 
   SingUp() {
     this.router.navigateByUrl('/register');
   }
-}
-
-export interface Login {
-  correo: string;
-  contrasena: string;
 }

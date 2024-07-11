@@ -18,11 +18,11 @@ export class RegisterComponent {
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.registerForm = this.fb.group({
-      dni: ['', Validators.required],
+      dni: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
-      numTelefono: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
+      numTelefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      correo: ['', [Validators.required, Validators.email, Validators.pattern(/^(?=.*@(?:gmail\.com|hotmail\.com)).*$/)]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -60,6 +60,13 @@ export class RegisterComponent {
             });
           }
         });
+    } else {
+      // Mostrar mensajes de error en el formulario
+      Swal.fire({
+        title: 'Formulario Incompleto',
+        text: 'Por favor, complete todos los campos correctamente.',
+        icon: 'warning',
+      });
     }
   }
 

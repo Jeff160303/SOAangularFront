@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav style="background-color: #d8c8bc;" class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand" href="#">APACHE STORE</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -22,11 +22,11 @@
       </ul>
       <div class="d-flex align-items-center">
         <div *ngIf="!userData" class="d-flex align-items-center">
-          <a class="nav-link text-dark" (click)="sesion()" style="margin-right: 15px;">
-            <img src="https://w7.pngwing.com/pngs/654/550/png-transparent-computer-icons-login-login-button-miscellaneous-angle-text-thumbnail.png" alt="Iniciar Sesión" style="width: 20px; margin-right: 5px;">Iniciar Sesión
+          <a class="nav-link text-dark" (click)="sesion()" style="margin-right: 35px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/54/54874.png" alt="Iniciar Sesión" style="width: 25px; margin-right: 5px; margin-bottom: 10px; margin-top: 5px;"><p style="display: contents">Iniciar Sesión</p>
           </a>
           <a class="nav-link text-dark" (click)="registro()">
-            <img src="https://static.thenounproject.com/png/736543-200.png" alt="Registrarse" style="width: 20px; margin-right: 5px;">Registrarse
+            <img src="https://static.thenounproject.com/png/736543-200.png" alt="Registrarse" style="width: 25px; margin-right: 5px; margin-bottom: 10px; margin-top: 5px;"><p style="display: contents;">Registrarse</p>
           </a>
         </div>
         <div *ngIf="userData" class="btn-group">

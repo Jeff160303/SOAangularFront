@@ -27,7 +27,7 @@
       <img (click)="detalleProducto(producto.idProducto)" [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}">
     </div>
     <div class="product-details">
-      <p class="product-name pointer" (click)="detalleProducto(producto.idProducto)">{{ producto.nombreProducto }}</p>
+      <p style="height: 55px;" class="product-name pointer" (click)="detalleProducto(producto.idProducto)">{{ producto.nombreProducto }}</p>
       <div class="product-pricing pointer" (click)="detalleProducto(producto.idProducto)">
         <p class="product-price">S/. {{ producto.precioProducto }}</p>
         <p class="product-original-price">S/. {{ (producto.precioProducto * 1.3).toFixed(2) }}</p>

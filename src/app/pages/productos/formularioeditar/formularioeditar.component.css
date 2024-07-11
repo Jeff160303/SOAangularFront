@@ -36,7 +36,7 @@
 
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus {
-  border-color: #007bff;
+  border-color: #5c340c;
 }
 
 .button-container {
@@ -48,7 +48,7 @@
   margin-left: 30px;
   margin-right: 30px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color: #a47b5a;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -57,7 +57,7 @@
 }
 
 .button-container button:hover {
-  background-color: #0056b3;
+  background-color: #5c340c;
 }
 
 .detalle-group {

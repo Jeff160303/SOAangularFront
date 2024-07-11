@@ -31,12 +31,12 @@
             <input type="text" class="form-control" [(ngModel)]="detalle.codigoPostal" [readonly]="!editMode[i]">
           </div>
           <div class="col-md-4 mb-3 text-center">
-            <button class="btn btn-primary btn-sm mr-2" (click)="editarDireccion(i)">Editar</button>
-            <button class="btn btn-danger btn-sm" (click)="eliminarDireccion(i)">Eliminar</button>
+            <button class="btn btn-sm mr-2" (click)="editarDireccion(i)">Editar</button>
+            <button class="btn btn-sm" (click)="eliminarDireccion(i)">Eliminar</button>
           </div>
           <div class="col-md-12 mt-2" *ngIf="editMode[i]">
-            <button class="btn btn-success btn-sm mr-2" (click)="confirmarCambio(i)">Confirmar</button>
-            <button class="btn btn-secondary btn-sm" (click)="cancelarEdicion(i)">Cancelar</button>
+            <button class="btn btn-sm mr-2" (click)="confirmarCambio(i)">Confirmar</button>
+            <button class="btn btn-sm" (click)="cancelarEdicion(i)">Cancelar</button>
           </div>
         </div>
       </div>
@@ -50,12 +50,12 @@
         <input type="text" class="form-control" [(ngModel)]="direccionTemporal.codigoPostal">
       </div>
       <div class="col-md-12 mb-3" *ngIf="agregarDireccionMode">
-        <button class="btn btn-success btn-sm mr-2" (click)="crearDireccion()">Crear</button>
-        <button class="btn btn-secondary btn-sm" (click)="cancelarAgregarDireccion()">Cancelar</button>
+        <button class="btn btn-sm mr-2" (click)="crearDireccion()">Crear</button>
+        <button class="btn btn-sm" (click)="cancelarAgregarDireccion()">Cancelar</button>
       </div>
 
       <div class="col-md-12 mb-3" *ngIf="detallesUsuario.length < 2 && !agregarDireccionMode">
-        <button class="btn btn-success btn-sm" (click)="mostrarFormularioAgregarDireccion()">Agregar Dirección</button>
+        <button class="btn btn-sm" (click)="mostrarFormularioAgregarDireccion()">Agregar Dirección</button>
       </div>
 
       <div class="col-md-12 mb-3">
@@ -69,7 +69,7 @@
                 <input type="password" id="password" class="form-control" value="password" readonly>
             </div>
             <div style="margin-top: 22px; margin-left: 20px; margin-right: -24px;" class="ml-3">
-                <button class="btn btn-warning" type="button" (click)="cambiarContrasena()">Cambiar Contraseña</button>
+                <button class="btn" type="button" (click)="cambiarContrasena()">Cambiar Contraseña</button>
             </div>
         </div>
     </div>

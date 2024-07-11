@@ -30,21 +30,20 @@ input[readonly] {
   border-radius: 4px;
 }
 
-.profile-button {
-  background-color: #007bff;
-  border: none;
+button{
+  background-color: #a47b5a;
+  border-color: #a47b5a;
   color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
 }
 
-.profile-button:hover {
-  background-color: #0056b3;
+button:hover{
+  background-color: #5c340c;
+  border-color: #5c340c;
+  color: white;
 }
 
 .delete-button {
-  background-color: #dc3545;
+  background-color: #a47b5a;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -54,7 +53,7 @@ input[readonly] {
 }
 
 .delete-button:hover {
-  background-color: #c82333;
+  background-color: #5c340c;
 }
 
 

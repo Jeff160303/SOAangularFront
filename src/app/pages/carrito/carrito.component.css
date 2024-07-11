@@ -179,7 +179,7 @@ body {
   display: block;
   width: 100%;
   padding: 15px;
-  background-color: #4CAF50;
+  background-color: #a47b5a;
   color: white;
   border: none;
   border-radius: 5px;
@@ -189,7 +189,7 @@ body {
 }
 
 .process-purchase:hover {
-  background-color: #45a049;
+  background-color: #5c340c;
 }
 
 @media (max-width: 768px) {
