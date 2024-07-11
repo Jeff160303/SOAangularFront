@@ -134,99 +134,21 @@ export class CarritoComponent implements OnInit {
     return this.calcularTotal();
   }
 
-
-
-
-
-
-
-
   makePayment(): void {
     const amount = this.calcularTotal() * 100;
+  
+    localStorage.setItem('userData', JSON.stringify(this.userData));
+    localStorage.setItem('carritos', JSON.stringify(this.carritos));
+  
     this.paymentService.createCheckoutSession(amount)
-     .then((response: any) => {
+      .then((response: any) => {
         const sessionId = response.id;
         const stripe = Stripe('pk_test_51Pb0tI2N50f3xlN2Yu218bz88PY5B8tZsAigCXQEqCdWisHn6vTzzT3stqW6rzumfmIVRZkSgKAmCGitMbwQEy0K00ILTTXvqV');
         stripe.redirectToCheckout({ sessionId: sessionId });
       })
-     .catch((error: any) => console.error(error));
+      .catch((error: any) => console.error(error));
   }
-
-
-
-
-
-
-
-
-
-
-
-  handleSuccessfulPayment() {
-    console.log('Handling successful payment...');
-
-    Swal.fire({
-      title: 'Procesando compra...',
-      text: 'Por favor espera un momento.',
-      icon: 'info',
-      allowOutsideClick: false,
-      showConfirmButton: false
-    });
-
-    if (this.userData && this.carritos.length > 0) {
-      const venta = {
-        fechaEmision: new Date(),
-        dni: this.userData.dni,
-        nombres: this.userData.nombres,
-        apellidos: this.userData.apellidos,
-        tipoVenta: 'pedido',
-        direccion: 'Dirección del usuario',
-        total: this.calcularTotalAmount(),
-        estado: 'pendiente'
-      };
-
-      const detalles = this.carritos.map(carrito => ({
-        nombreProducto: carrito.nombreProducto,
-        cantProducto: carrito.cantidadProducto,
-        tallaProducto: carrito.talla,
-        precioProducto: carrito.precioProducto
-      }));
-
-      const payload = {
-        email: this.userData.correo,
-        venta: venta,
-        detalles: detalles
-      };
-
-      console.log('Sending payload to backend:', payload);
-
-      this.http.post('http://localhost:8060/email/boleta', payload)
-        .subscribe(
-          response => {
-            console.log('Respuesta del servidor:', response);
-            Swal.fire({
-              title: 'Compra exitosa',
-              text: 'La boleta ha sido enviada por correo.',
-              icon: 'success'
-            });
-          },
-          error => {
-            console.error('Error al enviar la boleta:', error);
-            Swal.fire({
-              title: 'Error',
-              text: 'Ocurrió un error al enviar la boleta.',
-              icon: 'error'
-            });
-          }
-        );
-    } else {
-      Swal.fire({
-        title: 'Error',
-        text: 'No se encontraron productos en el carrito o no se encontraron datos de usuario.',
-        icon: 'error'
-      });
-    }
-  }
+  
   
   
 }
