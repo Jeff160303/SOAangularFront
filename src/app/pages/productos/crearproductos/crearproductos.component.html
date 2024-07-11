@@ -1,44 +1,60 @@
 <div class="form-container">
   <h2>Crear Producto</h2>
-  <form (ngSubmit)="guardarProducto()">
+  <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
     <div class="form-group">
-      <label for="nombreProducto">Nombre Producto:</label>
-      <input type="text" id="nombreProducto" [(ngModel)]="nuevoProducto.nombreProducto" name="nombreProducto" required>
+      <label for="nombreProducto">Nombre Producto: (Ingresa un nombre que haga referencia al producto, recomendacion: Falda, Polo, Pantalon, Camisa, Casaca, Chompa)</label>
+      <input type="text" id="nombreProducto" formControlName="nombreProducto" required>
+      <div *ngIf="productoForm.get('nombreProducto')?.invalid && (productoForm.get('nombreProducto')?.dirty || productoForm.get('nombreProducto')?.touched)" class="text-danger">
+        Nombre del producto es requerido
+      </div>
     </div>
     <div class="form-group">
-      <label for="catProducto">Genero Producto: (Hombre, Mujer)</label>
-      <select id="catProducto" [(ngModel)]="nuevoProducto.catProducto" name="catProducto" required>
-          <option value="Hombre">Hombre</option>
-          <option value="Mujer">Mujer</option>
+      <label for="catProducto">Género Producto:</label>
+      <select id="catProducto" formControlName="catProducto" required>
+        <option value="">Seleccione un género</option>
+        <option value="Hombre">Hombre</option>
+        <option value="Mujer">Mujer</option>
       </select>
-    </div>  
+      <div *ngIf="productoForm.get('catProducto')?.invalid && (productoForm.get('catProducto')?.dirty || productoForm.get('catProducto')?.touched)" class="text-danger">
+        Género del producto es requerido
+      </div>
+    </div>
     <div class="form-group">
       <label for="precioProducto">Precio Producto:</label>
-      <input type="number" id="precioProducto" [(ngModel)]="nuevoProducto.precioProducto" name="precioProducto" required>
+      <input type="number" id="precioProducto" formControlName="precioProducto" required>
+      <div *ngIf="productoForm.get('precioProducto')?.invalid && (productoForm.get('precioProducto')?.dirty || productoForm.get('precioProducto')?.touched)" class="text-danger">
+        Precio del producto es requerido
+      </div>
     </div>
     <div class="form-group">
-      <label for="imagenProducto">Imagen Producto:</label>
-      <input type="file" id="imagenProducto" (change)="onFileSelected($event)" name="imagenProducto" required>
+      <label for="imagenProducto">Imagen Producto: (Solo se admiten imagenes menores a 1mb)</label>
+      <input type="file" id="imagenProducto" (change)="onFileSelected($event)" required>
+      <div *ngIf="productoForm.get('imagenProducto')?.invalid && (productoForm.get('imagenProducto')?.dirty || productoForm.get('imagenProducto')?.touched)" class="text-danger">
+        Imagen del producto es requerida
+      </div>
     </div>
     <div class="checkbox-group">
       <label>Tallas:</label>
       <div class="size-container">
         <div class="size-item">
           <label>S</label>
-          <input type="number" [(ngModel)]="nuevoProducto.tallaS" name="tallaS" placeholder="Talla S">
+          <input type="number" formControlName="tallaS" placeholder="Talla S">
         </div>
         <div class="size-item">
           <label>M</label>
-          <input type="number" [(ngModel)]="nuevoProducto.tallaM" name="tallaM" placeholder="Talla M">
+          <input type="number" formControlName="tallaM" placeholder="Talla M">
         </div>
         <div class="size-item">
           <label>L</label>
-          <input type="number" [(ngModel)]="nuevoProducto.tallaL" name="tallaL" placeholder="Talla L">
+          <input type="number" formControlName="tallaL" placeholder="Talla L">
         </div>
+      </div>
+      <div *ngIf="productoForm.invalid && !atLeastOneSize()" class="text-danger">
+        Al menos una talla debe ser rellenada
       </div>
     </div>
     <div class="button-container">
-      <button type="submit">Guardar Producto</button>
+      <button type="submit" [disabled]="productoForm.invalid || !selectedFile || !atLeastOneSize()" [class.block]="productoForm.invalid || !selectedFile || !atLeastOneSize()">Guardar Producto</button>
     </div>
   </form>
 </div>

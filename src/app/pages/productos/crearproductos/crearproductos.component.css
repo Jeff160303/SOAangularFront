@@ -100,3 +100,8 @@ body {
 .button-container button:hover {
   background-color: #5c340c;
 }
+
+.block {
+  pointer-events: none;
+  opacity: 0.6;
+}

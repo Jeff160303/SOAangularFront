@@ -222,9 +222,9 @@ export class PerfilComponent {
     Swal.fire({
       title: 'Cambiar Contraseña',
       html:
-        '<input id="swal-input1" class="swal2-input" type="password" placeholder="Contraseña Actual">' +
-        '<input id="swal-input2" class="swal2-input" type="password" placeholder="Nueva Contraseña">' +
-        '<input id="swal-input3" class="swal2-input" type="password" placeholder="Confirmar Nueva Contraseña">',
+        '<input style="width: 300px; text-align: center" id="swal-input1" class="swal2-input" type="password" placeholder="Contraseña Actual">' +
+        '<input style="width: 300px; text-align: center" id="swal-input2" class="swal2-input" type="password" placeholder="Nueva Contraseña">' +
+        '<input style="width: 300px; text-align: center" id="swal-input3" class="swal2-input" type="password" placeholder="Confirmar Nueva Contraseña">',
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Confirmar',
