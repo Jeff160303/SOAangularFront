@@ -28,11 +28,13 @@ body {
   display: block;
   font-size: 16px;
   color: #555;
+  margin-bottom: 5px; /* Añadido para un mejor espaciado entre etiquetas y campos */
 }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
-.form-group input[type="file"] {
+.form-group input[type="file"],
+.form-group select {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -44,7 +46,8 @@ body {
 
 .form-group input[type="text"]:focus,
 .form-group input[type="number"]:focus,
-.form-group input[type="file"]:focus {
+.form-group input[type="file"]:focus,
+.form-group select:focus {
   border-color: #5c340c;
 }
 
@@ -69,10 +72,6 @@ body {
   margin-right: 10px;
 }
 
-.size-item input[type="checkbox"] {
-  margin-bottom: 5px;
-}
-
 .size-item input[type="number"] {
   width: 100%;
   padding: 5px;
@@ -84,6 +83,7 @@ body {
 
 .button-container {
   text-align: center;
+  margin-top: 20px; /* Ajusta el margen según sea necesario */
 }
 
 .button-container button {
@@ -101,7 +101,7 @@ body {
   background-color: #5c340c;
 }
 
-.block {
-  pointer-events: none;
-  opacity: 0.6;
+.button-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
