@@ -39,13 +39,15 @@ export class ExitoComponent implements OnInit {
     const direccionSeleccionada = localStorage.getItem('direccionSeleccionada') || 'Recojo en Tienda';
     console.log('Direccion seleccionada:', direccionSeleccionada);
 
+    const tipoVenta = direccionSeleccionada === 'Recojo en Tienda' ? 'Recojo en Tienda' : 'Pedido';
+
     if (this.userData && this.carritos.length > 0) {
       const venta = {
         fechaEmision: new Date(),
         dni: this.userData.dni,
         nombres: this.userData.nombres,
         apellidos: this.userData.apellidos,
-        tipoVenta: 'pedido',
+        tipoVenta: tipoVenta,
         direccion: direccionSeleccionada,
         total: this.calcularTotalAmount(this.carritos),
         estado: 'pendiente'

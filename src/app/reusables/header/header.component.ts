@@ -67,4 +67,8 @@ export class HeaderComponent implements OnInit {
   carrito(){
     this.router.navigateByUrl('/carrito')
   }
+
+  deliveryGestion(){
+    this.router.navigateByUrl('/deliveryGestion');
+  }
 }

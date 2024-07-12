@@ -14,6 +14,7 @@ import { DesconectadoComponent } from './reusables/desconectado/desconectado.com
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { ExitoComponent } from './pages/ventas/exito/exito.component';
+import { DeliveryGestionComponent } from './pages/delivery/delivery-gestion/delivery-gestion.component';
 
 export const routes: Routes = [
   {
@@ -93,6 +94,10 @@ export const routes: Routes = [
       {
         path: 'exito',
         component: ExitoComponent
+      },
+      {
+        path: 'deliveryGestion',
+        component: DeliveryGestionComponent
       }
     ]
   }

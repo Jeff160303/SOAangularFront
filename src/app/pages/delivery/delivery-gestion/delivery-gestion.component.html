@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h2>Listado de Ventas</h2>
+
+  <div class="mb-4">
+    <input type="text" class="form-control" placeholder="Buscar por DNI" [(ngModel)]="terminoBusqueda" (input)="filtrarVentas()">
+  </div>
+
+  <div style="min-height: 1000px;" *ngIf="ventasPendientesEnCaminoFiltradas.length > 0">
+    <h3>Pendiente / En Camino</h3>
+    <div *ngFor="let venta of ventasPendientesEnCaminoFiltradas" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ venta.nombres }} {{ venta.apellidos }}</h5>
+        <p class="card-text"><strong>Estado Actual:</strong> {{ venta.estado }}</p>
+        <p class="card-text"><strong>Actualizar Estado:</strong></p>
+        <select class="form-select mt-2" [(ngModel)]="venta.nuevoEstado">
+          <option *ngFor="let estado of getEstadosPermitidos(venta.estado)" [value]="estado">
+            {{ estado }}
+          </option>
+        </select>
+        <p class="card-text"><strong>Fecha de Emisión:</strong> {{ venta.fechaEmision | date:'short' }}</p>
+        <p class="card-text"><strong>DNI:</strong> {{ venta.dni }}</p>
+        <p class="card-text"><strong>Tipo de Venta:</strong> {{ venta.tipoVenta }}</p>
+        <p class="card-text"><strong>Dirección:</strong> {{ venta.direccion }}</p>
+        <p class="card-text"><strong>Total:</strong> {{ venta.total | currency }}</p>
+        <button class="btn btn-primary mt-2" (click)="actualizarEstado(venta)">Actualizar Estado</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="ventasEntregadas.length > 0">
+    <hr>
+    <h3>Entregado</h3>
+    <div *ngFor="let venta of ventasEntregadas" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ venta.nombres }} {{ venta.apellidos }}</h5>
+        <p class="card-text"><strong>Estado:</strong> {{ venta.estado }}</p>
+        <p class="card-text"><strong>Fecha de Emisión:</strong> {{ venta.fechaEmision | date:'short' }}</p>
+        <p class="card-text"><strong>DNI:</strong> {{ venta.dni }}</p>
+        <p class="card-text"><strong>Tipo de Venta:</strong> {{ venta.tipoVenta }}</p>
+        <p class="card-text"><strong>Dirección:</strong> {{ venta.direccion }}</p>
+        <p class="card-text"><strong>Total:</strong> {{ venta.total | currency }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,10 +7,10 @@
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!userData || userData?.rol === 'usuario'">
           <a class="nav-link" (click)="inicio()">Inicio</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!userData || userData?.rol === 'usuario'">
           <a class="nav-link" (click)="productos()">Productos</a>
         </li>
         <li class="nav-item" *ngIf="userData?.rol === 'administrador'">
@@ -18,6 +18,9 @@
         </li>
         <li class="nav-item" *ngIf="userData?.rol === 'administrador'">
           <a class="nav-link" (click)="editarproductos()">Administrar Productos</a>
+        </li>
+        <li class="nav-item" *ngIf="userData?.rol === 'delivery'">
+          <a class="nav-link" (click)="deliveryGestion()">Administrar Delivery</a>
         </li>
       </ul>
       <div class="d-flex align-items-center">
@@ -35,7 +38,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" (click)="perfil()" type="button">Perfil</a></li>
-            <li><a class="dropdown-item" (click)="delivery()" type="button">Delivery</a></li>
+            <li *ngIf="userData?.rol === 'usuario'"><a class="dropdown-item" (click)="delivery()" type="button">Delivery</a></li>
             <li><a class="dropdown-item" (click)="sesion()" type="button">Cerrar Sesión</a></li>
           </ul>
         </div>

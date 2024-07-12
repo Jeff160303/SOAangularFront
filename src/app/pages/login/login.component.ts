@@ -36,7 +36,13 @@ export class LoginComponent {
                 text: 'Acceso correcto!',
                 icon: 'success',
               });
-              this.router.navigateByUrl('/');
+              if (this.authService.getUserRole() == 'administrador'){
+                this.router.navigateByUrl('/editarproductos');
+              }else if (this.authService.getUserRole() == 'delivery'){
+                this.router.navigateByUrl('/deliveryGestion');
+              }else{
+                this.router.navigateByUrl('/');
+              }
             } else {
               Swal.fire({
                 title: 'Error!',
