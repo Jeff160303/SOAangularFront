@@ -1,0 +1,22 @@
+.btn{
+    background-color: #a47b5a;
+    color: white;
+}
+
+.btn:hover{
+    background-color: #84542a;
+}
+
+.detalle-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+  
+.detalle-item:last-child {
+    border-bottom: none;
+}
+  
+.card {
+    margin-top: 10px;
+}
+  

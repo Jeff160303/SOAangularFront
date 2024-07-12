@@ -44,7 +44,25 @@
       <p *ngIf="detallesUsuario.length === 0">No hay direcciones disponibles.</p>
     </div>
 
-    <button class="process-purchase" (click)="makePayment()">Pagar Con Strip</button>
+    <div style="text-align: center; font-weight: 300;">
+      <p>
+        Si aún no tienes una direccion puedes crearla en la seccion 
+        <strong style="font-weight: 500;">PERFIL</strong> 
+        que se encuentra al darle click a tu nombre en la 
+        <strong style="font-weight: 500;">PARTE SUPERIOR.</strong>
+      </p>
+    </div>
+
+    <div style="text-align: center; font-weight: 300;">
+      <p>
+        <strong style="font-weight: 500;">
+          Los datos de la boleta seran enviados al correco
+          con el que creaste esta cuenta.
+        </strong> 
+      </p>
+    </div>
+
+    <button class="process-purchase" (click)="makePayment()">Pagar</button>
     
   </div>
 

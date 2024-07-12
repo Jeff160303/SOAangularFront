@@ -14,7 +14,10 @@ import { DetalleVenta } from '../../models/detalle-venta.model';
 })
 export class DeliveryComponent implements OnInit {
   ventas: Venta[] = [];
+  ventasEntregadas: Venta[] = [];
   detalles: { [key: number]: DetalleVenta[] } = {};
+  mostrarDetalles: { [key: number]: boolean } = {};
+  mostrarComprasCompletadas: boolean = false;
   userData: UserData | null = null;
 
   constructor(private ventasService: VentasService, private authService: AuthService) {}
@@ -30,7 +33,8 @@ export class DeliveryComponent implements OnInit {
 
   obtenerVentasPorDni(dni: string): void {
     this.ventasService.getVentasPorDni(dni).subscribe((ventas: Venta[]) => {
-      this.ventas = ventas;
+      this.ventas = ventas.filter(venta => venta.estado !== 'entregado');
+      this.ventasEntregadas = ventas.filter(venta => venta.estado === 'entregado');
     });
   }
 
@@ -40,5 +44,10 @@ export class DeliveryComponent implements OnInit {
         this.detalles[idVenta] = detalles;
       });
     }
+    this.mostrarDetalles[idVenta] = !this.mostrarDetalles[idVenta];
+  }
+
+  toggleMostrarComprasCompletadas(): void {
+    this.mostrarComprasCompletadas = !this.mostrarComprasCompletadas;
   }
 }

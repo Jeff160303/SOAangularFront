@@ -3,6 +3,7 @@ import { Venta } from '../../../models/venta.model';
 import { VentasService } from '../ventas.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DetalleVenta } from '../../../models/detalle-venta.model';
 
 @Component({
   selector: 'app-delivery-gestion',
@@ -18,6 +19,8 @@ export class DeliveryGestionComponent implements OnInit {
   ventasEntregadas: Venta[] = [];
   estadosPosibles: string[] = ['pendiente', 'enviado', 'entregado'];
   terminoBusqueda: string = '';
+  detalles: { [key: number]: DetalleVenta[] } = {};
+  mostrarDetalles: { [key: number]: boolean } = {};
 
   constructor(private ventasService: VentasService) {}
 
@@ -62,5 +65,14 @@ export class DeliveryGestionComponent implements OnInit {
     this.ventasPendientesEnCaminoFiltradas = this.ventasPendientesEnCamino.filter(venta => {
       return venta.dni.toLowerCase().includes(termino);
     });
+  }
+
+  obtenerDetallesDeVenta(idVenta: number): void {
+    if (!this.detalles[idVenta]) {
+      this.ventasService.getDetallesDeVenta(idVenta).subscribe((detalles: DetalleVenta[]) => {
+        this.detalles[idVenta] = detalles;
+      });
+    }
+    this.mostrarDetalles[idVenta] = !this.mostrarDetalles[idVenta];
   }
 }

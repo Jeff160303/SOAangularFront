@@ -127,7 +127,6 @@ export class ExitoComponent implements OnInit {
     Promise.all(eliminarProductoPromises)
       .then(() => {
         console.log('Carrito vaciado exitosamente.');
-        this.router.navigate(['/']);
       })
       .catch(error => {
         console.error('Error al vaciar el carrito:', error);
