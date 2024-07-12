@@ -1,25 +1,18 @@
-.table-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.table {
+.card-img-top {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  height: 300px;
+  object-fit: cover;
+  cursor: pointer;
 }
 
-
-.table th {
-  padding: 15px;
-  margin-left: 5px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+.card-title {
+  font-size: 18px;
+  color: #333;
 }
 
-.table tr:hover {
-  background-color: #f5f5f5;
+.card-text {
+  font-size: 14px;
+  color: #555;
 }
 
 .action-button {
@@ -30,9 +23,6 @@
   border: none;
   border-radius: 4px;
   transition: background-color 0.3s ease;
-}
-
-td button{
   margin: 5px;
 }
 
@@ -40,36 +30,8 @@ td button{
   background-color: #5c340c;
 }
 
-.product-info {
-  padding: 10px;
-}
-
-.product-info h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #333;
-}
-
-.product-info p {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #555;
-}
-
-.detail-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.detail-list li {
-  margin-bottom: 5px;
-  margin-left: 5px;
-}
-
-.detail-list span {
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 14px;
-  color: #555;
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }

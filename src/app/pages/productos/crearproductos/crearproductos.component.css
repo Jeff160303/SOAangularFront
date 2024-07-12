@@ -21,6 +21,7 @@ body {
 }
 
 .form-group {
+  position: relative;
   margin-bottom: 20px;
 }
 
@@ -70,6 +71,7 @@ body {
   flex: 1;
   text-align: center;
   margin-right: 10px;
+  position: relative; /* Añadido para alinear el tooltip */
 }
 
 .size-item input[type="number"] {
@@ -104,4 +106,27 @@ body {
 .button-container button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #5c340c;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1;
+}
+
+.size-item:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.form-group:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
 }

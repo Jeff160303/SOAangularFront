@@ -1,33 +1,38 @@
 <div class="formulario-editar form-container">
   <h2>Editar Producto</h2>
-  <form>
-    <div class="form-group">
-      <label for="nombre">Nombre del Producto</label>
-      <input type="text" id="nombre" [(ngModel)]="producto.nombreProducto" name="nombre" class="form-control">
+  <div class="form-content">
+    <div class="form-image">
+      <img *ngIf="producto.imagenProducto" [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}" class="product-image">
     </div>
-    <div class="form-group">
-      <label for="categoria">Categoría del Producto</label>
-      <input type="text" id="categoria" [(ngModel)]="producto.catProducto" name="categoria" class="form-control" readonly>
-    </div>
-    <div class="form-group">
-      <label for="precio">Precio del Producto</label>
-      <input type="number" id="precio" [(ngModel)]="producto.precioProducto" name="precio" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="tallaS">Talla S</label>
-      <input type="number" id="tallaS" [(ngModel)]="producto.tallaS" name="tallaS" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="tallaM">Talla M</label>
-      <input type="number" id="tallaM" [(ngModel)]="producto.tallaM" name="tallaM" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="tallaL">Talla L</label>
-      <input type="number" id="tallaL" [(ngModel)]="producto.tallaL" name="tallaL" class="form-control">
-    </div>
-    <div class="button-container">
-      <button type="button" class="btn btn-primary" (click)="editar()">Confirmar</button>
-      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
-    </div>
-  </form>
+    <form class="form-details">
+      <div class="form-group">
+        <label for="nombre">Nombre del Producto</label>
+        <input type="text" id="nombre" [(ngModel)]="producto.nombreProducto" name="nombre" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="categoria">Categoría del Producto</label>
+        <input type="text" id="categoria" [(ngModel)]="producto.catProducto" name="categoria" class="form-control" readonly>
+      </div>
+      <div class="form-group">
+        <label for="precio">Precio del Producto</label>
+        <input type="number" id="precio" [(ngModel)]="producto.precioProducto" name="precio" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="tallaS">Talla S</label>
+        <input type="number" id="tallaS" [(ngModel)]="producto.tallaS" name="tallaS" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="tallaM">Talla M</label>
+        <input type="number" id="tallaM" [(ngModel)]="producto.tallaM" name="tallaM" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="tallaL">Talla L</label>
+        <input type="number" id="tallaL" [(ngModel)]="producto.tallaL" name="tallaL" class="form-control">
+      </div>
+      <div class="button-container">
+        <button type="button" class="btn btn-primary" (click)="editar()">Confirmar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
 </div>

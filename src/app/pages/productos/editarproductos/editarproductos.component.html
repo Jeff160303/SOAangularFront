@@ -1,38 +1,34 @@
-<div class="table-container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Imagen</th>
-        <th>Producto</th>
-        <th>Detalles</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let producto of productos">
-        <td>
-          <img style="width: 80px;" (click)="detalleProducto(producto.idProducto)" [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}">
-        </td>
-        <td>
-          <div class="product-info">
-            
-            <h3>{{ producto.nombreProducto }}</h3>
-            <p>Categoría: {{ producto.catProducto }}</p>
-            <p>Precio: {{ producto.precioProducto }}</p>
-          </div>
-        </td>
-        <td>
-          <ul class="detail-list">
-            <li>Talla S: {{ producto.tallaS }}</li>
-            <li>Talla M: {{ producto.tallaM }}</li>
-            <li>Talla L: {{ producto.tallaL }}</li>
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-12">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar por nombre"
+        [(ngModel)]="searchTerm"
+        (input)="buscarProducto()"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let producto of productosFiltrados">
+      <div class="card mb-4">
+        <img class="card-img-top" (click)="editarProducto(producto.idProducto)" [src]="producto.imagenProducto" alt="{{ producto.nombreProducto }}">
+        <div class="card-body">
+          <h5 style="height: 55px;" class="card-title">{{ producto.nombreProducto }}</h5>
+          <p class="card-text">Categoría: {{ producto.catProducto }}</p>
+          <p class="card-text">Precio: {{ producto.precioProducto }}</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Talla S: {{ producto.tallaS }}</li>
+            <li class="list-group-item">Talla M: {{ producto.tallaM }}</li>
+            <li class="list-group-item">Talla L: {{ producto.tallaL }}</li>
           </ul>
-        </td>
-        <td>
-          <button class="action-button" (click)="editarProducto(producto.idProducto)">Editar</button>
-          <button class="action-button" (click)="eliminarProducto(producto.idProducto)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <div class="btn-group">
+            <button class="action-button" (click)="editarProducto(producto.idProducto)">Editar</button>
+            <button class="action-button" (click)="eliminarProducto(producto.idProducto)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,5 @@
 .formulario-editar {
-  max-width: 500px;
+  max-width: 800px;
   margin: 50px auto;
   padding: 20px;
   border-radius: 8px;
@@ -11,6 +11,28 @@
   margin-bottom: 20px;
   color: #333;
   text-align: center;
+}
+
+.form-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-image {
+  flex: 1 1 200px;
+  margin-right: 20px;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.form-details {
+  flex: 2 1 500px;
 }
 
 .form-group {
@@ -45,8 +67,8 @@
 
 .button-container button {
   padding: 10px 20px;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
   font-size: 16px;
   background-color: #a47b5a;
   color: #fff;
@@ -60,22 +82,18 @@
   background-color: #5c340c;
 }
 
-.detalle-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+@media (max-width: 576px) {
+  .form-content {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.detalle-item {
-  text-align: center;
-}
+  .form-image {
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
 
-.talla-stock label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.talla-stock input {
-  width: 90px;
-  margin: 0 auto;
+  .button-container button {
+    margin-bottom: 10px;
+  }
 }

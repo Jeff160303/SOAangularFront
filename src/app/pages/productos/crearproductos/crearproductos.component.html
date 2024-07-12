@@ -4,6 +4,14 @@
     <div class="form-group">
       <label for="nombreProducto">Nombre Producto:</label>
       <input type="text" id="nombreProducto" [(ngModel)]="nuevoProducto.nombreProducto" name="nombreProducto" required>
+      <div class="tooltip">Asegúrese de no poner un nombre tan largo. 
+        El nombre debe de ser referente al producto para que el usuario 
+        pueda buscarlo mas facilmente, algunas recomendaciones son:
+        <strong>
+          Camisa, Polo, Polera, Chaqueda, Blazer, Pantalon, Short, Falda,
+          Vestido, Conjunto, Jean, etc.
+        </strong>
+      </div>
     </div>
     <div class="form-group">
       <label for="catProducto">Género Producto: (Hombre, Mujer)</label>
@@ -12,14 +20,17 @@
         <option value="Hombre">Hombre</option>
         <option value="Mujer">Mujer</option>
       </select>
+      <div class="tooltip">Seleccione un género. Ayudara al usuario a filtrar los productos.</div>
     </div>  
     <div class="form-group">
       <label for="precioProducto">Precio Producto:</label>
       <input type="number" id="precioProducto" [(ngModel)]="nuevoProducto.precioProducto" name="precioProducto" required>
+      <div class="tooltip">Asegúrese de colocar bien el precio.</div>
     </div>
     <div class="form-group">
       <label for="imagenProducto">Imagen Producto:</label>
       <input type="file" id="imagenProducto" (change)="onFileSelected($event)" name="imagenProducto" required>
+      <div class="tooltip">La imagen debe de tener un peso menor a 1mb</div>
     </div>
     <div class="checkbox-group">
       <label>Tallas:</label>
@@ -27,14 +38,17 @@
         <div class="size-item">
           <label>S</label>
           <input type="number" [(ngModel)]="nuevoProducto.tallaS" name="tallaS" placeholder="Talla S">
+          <div class="tooltip">La talla debe ser un número entero.</div>
         </div>
         <div class="size-item">
           <label>M</label>
           <input type="number" [(ngModel)]="nuevoProducto.tallaM" name="tallaM" placeholder="Talla M">
+          <div class="tooltip">La talla debe ser un número entero.</div>
         </div>
         <div class="size-item">
           <label>L</label>
           <input type="number" [(ngModel)]="nuevoProducto.tallaL" name="tallaL" placeholder="Talla L">
+          <div class="tooltip">La talla debe ser un número entero.</div>
         </div>
       </div>
     </div>

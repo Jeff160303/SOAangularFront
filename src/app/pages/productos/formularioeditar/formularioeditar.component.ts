@@ -32,11 +32,18 @@ export class FormularioeditarComponent implements OnInit {
       (producto) => {
         console.log('Datos del producto recibidos:', producto);
         this.producto = producto;
+        this.actualizarURLImagen();
       },
       (error) => {
         console.error('Error al obtener detalles del producto:', error);
       }
     );
+  }
+
+  actualizarURLImagen(): void {
+    if (this.producto.imagenProducto) {
+      this.producto.imagenProducto = `http://localhost:8080/imagenes/${this.producto.imagenProducto}`;
+    }
   }
 
   editar(): void {

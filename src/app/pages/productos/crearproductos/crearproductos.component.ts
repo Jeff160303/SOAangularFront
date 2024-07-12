@@ -69,6 +69,10 @@ export class CrearproductosComponent {
           tallaL: 0,
           imagenProducto: ''
         };
+        const fileInput = document.getElementById('imagenProducto') as HTMLInputElement;
+        if (fileInput) {
+          fileInput.value = '';
+        }
         Swal.fire({
           title: 'Correcto',
           text: 'Producto Creado correctamente',
