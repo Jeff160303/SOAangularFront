@@ -42,7 +42,7 @@
             <li><a class="dropdown-item" (click)="sesion()" type="button">Cerrar Sesión</a></li>
           </ul>
         </div>
-        <div *ngIf="userData" class="cart position-relative" (click)="carrito()">
+        <div *ngIf="userData?.rol === 'usuario'" class="cart position-relative" (click)="carrito()">
           <span class="badge badge-danger position-absolute top-0 start-100 translate-middle" style="color: red;">{{ cantidadProductosEnCarrito }}</span>
           <span><i class="bi bi-cart4 text-dark"></i></span>
         </div>

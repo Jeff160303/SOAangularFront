@@ -41,11 +41,33 @@ export class DeliveryGestionComponent implements OnInit {
     if (venta.nuevoEstado) {
       this.ventasService.actualizarEstado(venta.idVenta, venta.nuevoEstado).subscribe(() => {
         this.getVentas();
+        this.enviarEmailActualizacionEstado(venta);
       });
     } else {
       console.error('nuevoEstado no está definido en la venta:', venta);
     }
   }
+
+  enviarEmailActualizacionEstado(venta: Venta): void {
+    this.ventasService.getUsuarioPorDni(venta.dni).subscribe((usuario: any) => {
+      const emailRequest = {
+        email: usuario.correo,
+        nombres: usuario.nombres,
+        apellidos: usuario.apellidos,
+        nuevoEstado: venta.nuevoEstado
+      };
+
+      this.ventasService.enviarEmailActualizacionEstado(emailRequest).subscribe(() => {
+        console.log('Email de actualización de estado enviado');
+      }, error => {
+        console.error('Error al enviar el correo electrónico:', error);
+      });
+    }, error => {
+      console.error('Error al obtener los detalles del usuario:', error);
+    });
+  }
+
+
 
   getEstadosPermitidos(estadoActual: string): string[] {
     switch (estadoActual) {

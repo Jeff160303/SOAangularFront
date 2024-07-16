@@ -28,4 +28,12 @@ export class VentasService {
   getDetallesDeVenta(idVenta: number): Observable<DetalleVenta[]> {
     return this.http.get<DetalleVenta[]>(`${this.apiUrl}/${idVenta}/detalles`);
   }
+
+  enviarEmailActualizacionEstado(emailRequest: any): Observable<void> {
+    return this.http.post<void>(`http://localhost:8060/email/actualizacion-estado`, emailRequest);
+  }
+
+  getUsuarioPorDni(dni: string): Observable<any> {
+    return this.http.get<any>(`http://localhost:8090/usuarios/listarporDni/${dni}`);
+  }
 }

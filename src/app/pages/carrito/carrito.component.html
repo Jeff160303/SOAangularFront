@@ -31,7 +31,7 @@
     <div class="cart-details">
       <p><span>Subtotal:</span><span class="price">S/. {{ calcularSubtotal() }}</span></p>
       <p><span>IGV (18%):</span><span class="price">S/. {{ calcularIGV() }}</span></p>
-      <p><span>Total:</span><span class="price">S/. {{ calcularTotal() }}</span></p>
+      <p><span>Total:</span><span class="price">S/. {{ calcularTotal() | number:'1.2-2' }}</span></p>
     </div>
 
     <div style="padding-bottom: 20px;" class="address-selection">

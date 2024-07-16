@@ -15,6 +15,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  correo: string = '';
+  dni: string = '';
+  newPassword: string = '';
+
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private authService: AuthService) {
@@ -65,4 +69,62 @@ export class LoginComponent {
   SingUp() {
     this.router.navigateByUrl('/register');
   }
+
+
+  olvidoContrasena() {
+    Swal.fire({
+      title: 'Olvidaste tu contraseña?',
+      html:
+        '<input id="correo" class="swal2-input" placeholder="Correo electrónico">' +
+        '<input id="dni" class="swal2-input" placeholder="DNI">' +
+        '<input id="nuevaContrasena" type="password" class="swal2-input" placeholder="Nueva contraseña">',
+      focusConfirm: false,
+      preConfirm: () => {
+        const correo = (document.getElementById('correo') as HTMLInputElement).value;
+        const dni = (document.getElementById('dni') as HTMLInputElement).value;
+        const nuevaContrasena = (document.getElementById('nuevaContrasena') as HTMLInputElement).value;
+        if (!correo || !dni || !nuevaContrasena) {
+          Swal.showValidationMessage('Por favor, introduce un correo electrónico, DNI y nueva contraseña válidos');
+        }
+        return { correo, dni, nuevaContrasena };
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const { correo, dni, nuevaContrasena } = result.value;
+        const url = `http://localhost:8090/usuarios/olvidoContraseña/${encodeURIComponent(correo)}/${dni}`;
+        this.http.put<string>(url, { newPassword: nuevaContrasena }).subscribe(
+          (response: any) => {
+            if (response == "1") {
+              Swal.fire({
+                title: 'Contraseña actualizada!',
+                text: 'Tu contraseña ha sido actualizada correctamente.',
+                icon: 'success',
+              });
+            } else {
+              Swal.fire({
+                title: 'Error!',
+                text: 'No se pudo procesar la solicitud. Verifica los datos proporcionados.',
+                icon: 'error',
+              });
+            }
+          },
+          (error: HttpErrorResponse) => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'No se pudo procesar la solicitud. Verifica los datos proporcionados.',
+              icon: 'error',
+            });
+          }
+        );
+      }
+    });
+  }
+  
+  
+  
+  
+  
+  
+
+
 }
